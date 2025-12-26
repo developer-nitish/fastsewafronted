@@ -359,15 +359,17 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-// Aapki Genuine Supabase Details
+// Fixed: Variable name changed to '_supabase' to avoid shadowing error
 const SUPABASE_URL = 'https://ngigmeshzxolcsvatkya.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_YskBq9gH080hwS8qpocB_Q_4g-WCrxO';
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// Yahan humne 'const supabase' ki jagah '_supabase' use kiya hai
+const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 async function syncGlobalStats() {
     try {
         // 1. Database se current visitors count mangwana
-        let { data, error } = await supabase
+        let { data, error } = await _supabase
             .from('site_stats')
             .select('count')
             .eq('label', 'total_visitors')
@@ -378,12 +380,12 @@ async function syncGlobalStats() {
         if (data) {
             let currentCount = data.count;
 
-            // 2. Unique Session Logic: Naya banda aane par hi count badhega
+            // 2. Unique Session Logic
             if (!sessionStorage.getItem('fs_counted')) {
                 currentCount += 1;
                 
                 // Global update in database
-                await supabase
+                await _supabase
                     .from('site_stats')
                     .update({ count: currentCount })
                     .eq('label', 'total_visitors');
@@ -391,13 +393,12 @@ async function syncGlobalStats() {
                 sessionStorage.setItem('fs_counted', 'true');
             }
 
-            // 3. UI Update (Ye GoDaddy/Vercel par sab users ko global data dikhayega)
+            // 3. UI Update (Using IDs from your HTML)
             const totalV = document.getElementById('total-v');
             const repeatV = document.getElementById('repeat-v');
             
             if (totalV) totalV.innerText = currentCount.toLocaleString();
             
-            // Repeated users logic (Genuine percentage of global visitors)
             if (repeatV) {
                 const repeatVal = Math.floor(currentCount * 0.32);
                 repeatV.innerText = repeatVal.toLocaleString();
@@ -408,21 +409,18 @@ async function syncGlobalStats() {
     }
 }
 
-// Online Now: Real-time fluctuation (Genuine behavior based on Patna peak hours)
 function updateOnlineUsers() {
     const hr = new Date().getHours();
-    // Din mein (9AM-9PM) 35-55 users, raat mein kam
     let base = (hr >= 9 && hr <= 21) ? 38 : 9;
     const onlineVal = base + Math.floor(Math.random() * 15);
     const onlineV = document.getElementById('online-v');
     if (onlineV) onlineV.innerText = onlineVal;
 }
 
-// Initialize when page loads
 document.addEventListener('DOMContentLoaded', () => {
     syncGlobalStats();
     updateOnlineUsers();
-    setInterval(updateOnlineUsers, 10000); // Har 10 seconds mein change hoga
+    setInterval(updateOnlineUsers, 10000); 
 });
 </script>
 
