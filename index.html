@@ -165,7 +165,7 @@
         </div>
     </section>
 
-    <section id="contact" class="contact-section">
+    <!-- <section id="contact" class="contact-section">
         <div class="container">
             <h2 class="section-title text-white reveal">Contact Us</h2>
             <p class="section-subtitle text-white reveal" style="margin-bottom: 3rem;">Get a free initial consultation for your business.</p>
@@ -229,7 +229,104 @@
         <div class="container">
             <p>&copy; 2024 FastSewa Super Portal. All rights reserved.</p>
         </div>
-    </footer>
+    </footer> -->
+
+
+
+
+
+
+
+    <!-- ================= CONTACT ================= -->
+<section id="contact" class="contact-section">
+    <div class="container">
+        <h2 class="section-title text-white">Contact Us</h2>
+        <p class="section-subtitle text-white">Get a free initial consultation</p>
+
+        <div class="contact-wrapper">
+
+            <!-- INFO -->
+            <div class="contact-info">
+                <h3>Get in Touch</h3>
+                <p><i class="fas fa-map-marker-alt"></i> B Hub, Gandhi Maidan, Patna, Bihar</p>
+                <p><i class="fas fa-phone-alt"></i> +91 8275723755</p>
+                <p><i class="fas fa-envelope"></i> fastsewa2020@gmail.com</p>
+            </div>
+
+            <!-- FORM -->
+            <div class="contact-form-box">
+                <form id="contactForm">
+
+                    <div class="form-group">
+                        <input type="text" name="name" id="name" required>
+                        <label>Your Name</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" name="email" id="email" required>
+                        <label>Your Email</label>
+                    </div>
+
+                    <div class="form-group">
+                        <select name="title" id="service" required>
+                            <option value="">Select Service</option>
+                            <option value="Construction">Construction</option>
+                            <option value="Security Guard">Security Guard</option>
+                            <option value="Legal & GST">Legal & GST</option>
+                            <option value="Medical Services">Medical Services</option>
+                            <option value="Land Verification">Land Verification</option>
+                            <option value="Repair & Maintenance">Repair & Maintenance</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea name="message" id="message" rows="4" required></textarea>
+                        <label>Brief description of your issue</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-block">Send Message</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+    <div class="container">
+        <p>&copy; 2024 FastSewa Super Portal. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- ================= EMAILJS ================= -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+(function () {
+    emailjs.init("82w8_I7wL3TeHxJa6"); // ✅ Public Key
+})();
+
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    emailjs.sendForm(
+        "service_ap93y7a",   // ✅ Service ID
+        "template_hvuzvq9",  // ✅ Template ID
+        this
+    ).then(
+        function () {
+            alert("✅ Message sent successfully!");
+            document.getElementById("contactForm").reset();
+        },
+        function (error) {
+            alert("❌ Message nahi gaya");
+            console.log(error);
+        }
+    );
+});
+</script>
+
 
 <!-- ==================== -->
 <!-- FASTSEWA CHATBOT HTML -->
