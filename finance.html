@@ -1,208 +1,2270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>FastSewa Finance Assistant</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Main site styles (jo already use kar rahe ho) -->
-  <link rel="stylesheet" href="finance.css" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastSewa | Financial Assistance & Loans</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* =================== */
+        /* GLOBAL RESET & VARIABLES */
+        /* =================== */
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #2ec4b6;
+            --accent: #ff5722;
+            --dark: #011627;
+            --light: #f8f9fa;
+            --gradient: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            --gradient-gold: linear-gradient(135deg, #ff9f1c 0%, #ffbf69 100%);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+            --radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* =================== */
+        /* SLIDING IMAGES HERO */
+        /* =================== */
+        .hero-section {
+            height: 100vh;
+            min-height: 700px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transform: scale(1.1);
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .hero-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 100%);
+        }
+
+        /* Hero Content */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+            transform: translateY(30px);
+            opacity: 0;
+            animation: heroContentFade 1s ease forwards 0.5s;
+        }
+
+        @keyframes heroContentFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-logo i {
+            font-size: 32px;
+            color: var(--secondary);
+            background: white;
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        .hero-logo span {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .hero-title {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .hero-description {
+            font-size: 18px;
+            opacity: 0.8;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Hero Controls */
+        .hero-controls {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            width: 100%;
+            z-index: 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .hero-nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+
+        .hero-nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .hero-dots {
+            display: flex;
+            gap: 10px;
+        }
+
+        .hero-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .hero-dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
+
+        /* =================== */
+        /* FINANCIAL VERTICAL SECTION */
+        /* =================== */
+        .financial-vertical {
+            padding: 100px 0;
+            position: relative;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: #64748b;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 32px;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: rotateY(180deg) scale(1.1);
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Loan Products */
+        .loan-products {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+
+        .product-tabs {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .tab-navigation {
+            display: flex;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-bottom: 1px solid #e2e8f0;
+            padding: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            flex: 1;
+            min-width: 200px;
+            padding: 18px 20px;
+            background: transparent;
+            border: none;
+            font-weight: 600;
+            font-size: 16px;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .tab-button:hover {
+            color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        .tab-button.active {
+            color: var(--primary);
+            background: white;
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient);
+        }
+
+        .tab-content-container {
+            padding: 40px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--gradient);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--gradient-gold);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .product-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 24px;
+        }
+
+        .product-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .interest-rate {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--secondary);
+            background: rgba(46, 196, 182, 0.1);
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .product-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .product-features li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #475569;
+            font-size: 14px;
+        }
+
+        .product-features i {
+            color: var(--secondary);
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .btn-apply {
+            flex: 1;
+            padding: 12px 20px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-apply:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
+        }
+
+        .btn-details {
+            padding: 12px 20px;
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-details:hover {
+            background: rgba(67, 97, 238, 0.05);
+        }
+
+        /* =================== */
+        /* EMI CALCULATOR SECTION */
+        /* =================== */
+        .emi-calculator-section {
+            padding: 100px 0;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .emi-calculator-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.1) 0%, rgba(67, 97, 238, 0.05) 100%);
+            border-radius: 50%;
+            transform: translate(200px, -200px);
+        }
+
+        .emi-calculator-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(46, 196, 182, 0.1) 0%, rgba(46, 196, 182, 0.05) 100%);
+            border-radius: 50%;
+            transform: translate(-150px, 150px);
+        }
+
+        .calculator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .calculator-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .calculator-inputs h3 {
+            font-size: 28px;
+            margin-bottom: 30px;
+            color: var(--dark);
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #475569;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+
+        .range-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            margin-top: 10px;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            background: var(--primary-dark);
+        }
+
+        .value-display {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .calculate-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
+        }
+
+        .calculator-results {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .results-header h3 {
+            font-size: 24px;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .result-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .result-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .result-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+
+        .result-label {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .breakdown-chart {
+            margin-top: 30px;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .breakdown-item:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* =================== */
+        /* PROCESS STEPS */
+        /* =================== */
+        .process-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            color: white;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: white;
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-weight: 700;
+            font-size: 24px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .process-step h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .process-step p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        /* =================== */
+        /* CTA SECTION */
+        /* =================== */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .cta-title {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        /* =================== */
+        /* RESPONSIVE DESIGN */
+        /* =================== */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 48px;
+            }
+            
+            .calculator-wrapper {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                height: auto;
+                min-height: 600px;
+                padding: 100px 0 60px;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .hero-subtitle {
+                font-size: 20px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .tab-navigation {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-actions {
+                flex-direction: column;
+            }
+            
+            .btn-apply, .btn-details {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .calculator-wrapper {
+                padding: 20px;
+            }
+            
+            .cta-title {
+                font-size: 32px;
+            }
+        }
+
+        /* Apply Now Form Styles */
+        .application-form-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 800px;
+            margin: 30px auto;
+            display: none; /* Hidden by default */
+        }
+
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .form-title {
+            font-size: 1.8rem;
+            color: #1e3c72;
+            margin: 0;
+        }
+
+        .close-form {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .loan-type-display {
+            background-color: #f0f7ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 25px;
+            border-left: 4px solid #2a5298;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        label.required:after {
+            content: " *";
+            color: #e74c3c;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #2a5298;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(42, 82, 152, 0.2);
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn-submit {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-cancel {
+            background-color: #f5f5f5;
+            color: #333;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-note {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .form-row .form-group {
+                min-width: 100%;
+            }
+            
+            .application-form-container {
+                padding: 20px;
+                margin: 20px auto;
+            }
+        }
+
+        /* =================== */
+/* CONTACT SECTION */
+/* =================== */
+.contact-section {
+    padding: 100px 0;
+    background: white;
+    position: relative;
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 50px;
+}
+
+/* Left Side: Info Box */
+.contact-info-box {
+    background: var(--gradient);
+    color: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(67, 97, 238, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-info-box::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.info-header h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.info-header p {
+    opacity: 0.9;
+    margin-bottom: 40px;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.contact-text h4 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.contact-text p {
+    font-size: 15px;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+.social-links {
+    margin-top: 50px;
+    display: flex;
+    gap: 15px;
+}
+
+.social-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+    transform: translateY(-3px);
+    background: var(--accent);
+    color: white;
+}
+
+/* Right Side: Contact Form */
+.contact-form-wrapper {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.contact-form-wrapper h3 {
+    font-size: 24px;
+    color: var(--dark);
+    margin-bottom: 30px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.contact-input {
+    width: 100%;
+    padding: 15px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.contact-input:focus {
+    background: white;
+    border-color: var(--primary);
+    outline: none;
+}
+
+.btn-send {
+    background: var(--dark);
+    color: white;
+    padding: 15px 35px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-send:hover {
+    background: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
+}
+
+/* =================== */
+/* FOOTER */
+/* =================== */
+.footer {
+    background: var(--dark);
+    color: white;
+    padding: 80px 0 20px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.footer-brand h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-brand p {
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.footer-col h3 {
+    font-size: 18px;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.footer-col h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--secondary);
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 15px;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-links a:hover {
+    color: white;
+    transform: translateX(5px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* Responsive for Contact & Footer */
+@media (max-width: 900px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+}
+    </style>
 </head>
-<body class="finance-body">
-  <!-- Top hero section -->
-  <header class="finance-hero">
-    <div class="finance-hero-inner">
-      <div class="hero-left">
-        <span class="badge-pill">
-          <i class="fas fa-wallet"></i>
-          New Service · Finance Assistant
-        </span>
-        <h1>Personal Finance Assistant for Everyday Decisions</h1>
-        <p>
-          Get a dedicated finance assistant to help you plan monthly budgets, EMIs,
-          savings goals and prepare for tax season – all in simple language, not
-          complicated finance jargon.
-        </p>
+<body>
 
-        <div class="hero-points">
-          <div class="point">
-            <i class="fas fa-rupee-sign"></i>
-            <span>Understand where your money is going every month.</span>
-          </div>
-          <div class="point">
-            <i class="fas fa-chart-line"></i>
-            <span>Create practical savings & investment plans.</span>
-          </div>
-          <div class="point">
-            <i class="fas fa-file-invoice"></i>
-            <span>Stay prepared for EMIs, bills and taxes.</span>
-          </div>
+    <section class="hero-section">
+        <div class="hero-slideshow">
+            <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1473&q=80');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1473&q=80');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1411&q=80');"></div>
         </div>
-
-        <div class="hero-cta">
-          <button class="btn-primary" onclick="document.getElementById('financeForm').scrollIntoView({behavior:'smooth'});">
-            Book Free Finance Session
-          </button>
-          <span class="hero-note">
-            <i class="fas fa-check-circle"></i>
-            First consultation is completely free.
-          </span>
+        
+        <div class="hero-content">
+            <div class="hero-logo">
+                <i class="fas fa-hand-holding-usd"></i>
+                <span>FastSewa Finance</span>
+            </div>
+            <h1 class="hero-title">Financial Assistance & Loan Solutions</h1>
+            <p class="hero-subtitle">Your Trusted Partner for Construction, Home, and Business Financing</p>
+            <p class="hero-description">Get specialized loan options with competitive interest rates, quick approvals, and flexible repayment plans designed for your construction and business needs.</p>
+            <div class="hero-buttons">
+                <a href="#loan-products" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Explore Loan Options
+                </a>
+                <a href="#emi-calculator" class="btn btn-outline">
+                    <i class="fas fa-calculator"></i> Calculate EMI
+                </a>
+            </div>
         </div>
-      </div>
-
-      <div class="hero-right">
-        <div class="money-card">
-          <div class="money-header">
-            <span>Monthly Snapshot</span>
-            <strong>Smart Budget Preview</strong>
-          </div>
-          <ul>
-            <li>
-              <span>Income</span>
-              <strong>₹ 60,000</strong>
-            </li>
-            <li>
-              <span>Planned Expenses</span>
-              <strong>₹ 42,500</strong>
-            </li>
-            <li>
-              <span>Potential Savings</span>
-              <strong class="positive">₹ 17,500</strong>
-            </li>
-          </ul>
-          <p class="money-foot">
-            Your real plan will be customised after a quick 15‑minute call.
-          </p>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Main content -->
-  <main class="finance-main">
-    <div class="finance-grid">
-      <!-- Left column: What you get -->
-      <section class="finance-section">
-        <h2>Where Finance Assistant Helps You</h2>
-
-        <div class="feature-grid">
-          <div class="feature-card">
-            <i class="fas fa-list-check"></i>
-            <h3>Monthly Budget Plan</h3>
-            <p>Create a realistic budget for rent, groceries, EMIs, education, and lifestyle – not a spreadsheet you never open.</p>
-          </div>
-          <div class="feature-card">
-            <i class="fas fa-credit-card"></i>
-            <h3>Loan & EMI Planning</h3>
-            <p>Understand how much EMI you can safely afford and how to clear loans faster without breaking your monthly cash‑flow.</p>
-          </div>
-          <div class="feature-card">
-            <i class="fas fa-piggy-bank"></i>
-            <h3>Savings & Goals</h3>
-            <p>Set saving goals for emergency fund, travel, marriage, home or higher studies with clear monthly targets.</p>
-          </div>
-          <div class="feature-card">
-            <i class="fas fa-receipt"></i>
-            <h3>Tax Season Ready</h3>
-            <p>Get a checklist of documents, investments and deadlines so that tax filing never becomes last‑minute panic.</p>
-          </div>
-        </div>
-
-        <div class="how-it-works">
-          <h2>How It Works</h2>
-          <ol>
-            <li>Fill the quick form with your income, expenses and main goal.</li>
-            <li>Our finance assistant analyses your inputs and prepares a draft plan.</li>
-            <li>You get a call / WhatsApp with personalised suggestions and next steps.</li>
-          </ol>
-          <p class="disclaimer">
-            <strong>Note:</strong> This is a basic financial guidance service. It is not a substitute for SEBI‑registered investment advisory or professional tax consultancy.
-          </p>
-        </div>
-      </section>
-
-      <!-- Right column: Form -->
-      <section class="finance-section form-section">
-        <h2>Request Your Finance Assistant</h2>
-        <p class="section-subtitle">
-          Share a few details so we can prepare a personalised budget & savings plan
-          before contacting you.
-        </p>
-
-        <form id="financeForm" class="finance-form">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="fullName">Full Name</label>
-              <input id="fullName" name="fullName" type="text" required />
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" required />
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="phone">Phone</label>
-              <input id="phone" name="phone" type="tel" required />
-            </div>
-            <div class="form-group">
-              <label for="goalType">Primary Financial Goal</label>
-              <select id="goalType" name="goalType" required>
-                <option value="">Select goal</option>
-                <option value="budget">Control monthly spending</option>
-                <option value="emi">Plan EMIs / loan</option>
-                <option value="savings">Increase savings</option>
-                <option value="investment">Start basic investments</option>
-                <option value="tax">Plan for tax season</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="monthlyIncome">Approx Monthly Income (₹)</label>
-              <input id="monthlyIncome" name="monthlyIncome" type="number" min="0" required />
-            </div>
-            <div class="form-group">
-              <label for="monthlyExpense">Approx Monthly Expenses (₹)</label>
-              <input id="monthlyExpense" name="monthlyExpense" type="number" min="0" required />
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="notes">Anything specific we should know?</label>
-            <textarea id="notes" name="notes" rows="3"
-              placeholder="Example: Existing home loan, credit card dues, upcoming big purchase, etc."></textarea>
-          </div>
-
-          <button id="financeSubmit" type="submit" class="btn-primary full-width">
-            Submit Request
-          </button>
-
-          <p id="financeStatus" class="form-status" aria-live="polite"></p>
-
-          <div class="after-submit-actions" id="financeActions" style="display:none;">
-            <button type="button" class="btn-secondary" id="goToDashboard">
-              Go to My Dashboard
+        
+        <div class="hero-controls">
+            <button class="hero-nav-btn" id="prev-hero-slide">
+                <i class="fas fa-chevron-left"></i>
             </button>
-            <button type="button" class="btn-outline" id="newFinanceRequest">
-              Submit Another Request
+            
+            <div class="hero-dots">
+                <div class="hero-dot active" data-slide="0"></div>
+                <div class="hero-dot" data-slide="1"></div>
+                <div class="hero-dot" data-slide="2"></div>
+                <div class="hero-dot" data-slide="3"></div>
+            </div>
+            
+            <button class="hero-nav-btn" id="next-hero-slide">
+                <i class="fas fa-chevron-right"></i>
             </button>
-          </div>
+        </div>
+    </section>
+
+    <section class="financial-vertical">
+        <div class="section-header">
+            <h2 class="section-title">Why Choose FastSewa Finance?</h2>
+            <p class="section-subtitle">We understand your construction and business financing needs better than anyone</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-percentage"></i>
+                </div>
+                <h3>Lowest Interest Rates</h3>
+                <p>Starting from 8.5% p.a. with special discounts for FastSewa construction clients</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Quick Approval</h3>
+                <p>Get loan approval within 72 hours with minimal documentation requirements</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Secure & Transparent</h3>
+                <p>Complete transparency in charges with no hidden fees or surprise costs</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Dedicated Support</h3>
+                <p>Personal relationship manager for each client with 24/7 support availability</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="loan-products" class="loan-products">
+        <div class="section-header">
+            <h2 class="section-title">Our Loan Products</h2>
+            <p class="section-subtitle">Specialized financing solutions for every stage of your construction journey</p>
+        </div>
+        
+        <div class="product-tabs">
+            <div class="tab-navigation">
+                <button class="tab-button active" data-tab="construction-loan">
+                    <i class="fas fa-building"></i> Construction Loans
+                </button>
+                <button class="tab-button" data-tab="home-loan">
+                    <i class="fas fa-home"></i> Home Loans
+                </button>
+                <button class="tab-button" data-tab="business-loan">
+                    <i class="fas fa-briefcase"></i> Business Loans
+                </button>
+            </div>
+            
+            <div class="tab-content-container">
+                <div class="tab-content active" id="construction-loan">
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <div class="product-badge">Most Popular</div>
+                            <div class="product-icon">
+                                <i class="fas fa-hard-hat"></i>
+                            </div>
+                            <h3 class="product-title">New Construction Loan</h3>
+                            <div class="interest-rate">8.5% - 10.5% p.a.</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check-circle"></i> Up to 80% of construction cost</li>
+                                <li><i class="fas fa-check-circle"></i> ₹5 Lakhs - ₹5 Crores</li>
+                                <li><i class="fas fa-check-circle"></i> Flexible tenure: 5-30 years</li>
+                                <li><i class="fas fa-check-circle"></i> Stage-wise disbursement</li>
+                                <li><i class="fas fa-check-circle"></i> Architect consultation included</li>
+                            </ul>
+                            <div class="product-actions">
+                                <button class="btn-apply" data-loan="New Construction Loan" data-interest="8.5% – 10.5% p.a.">Apply Now</button>
+                                <button class="btn-details">View Details</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card">
+                            <div class="product-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <h3 class="product-title">Home Renovation Loan</h3>
+                            <div class="interest-rate">10.0% - 12.5% p.a.</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check-circle"></i> Up to ₹25 Lakhs</li>
+                                <li><i class="fas fa-check-circle"></i> No collateral required</li>
+                                <li><i class="fas fa-check-circle"></i> Quick disbursement in 48 hours</li>
+                                <li><i class="fas fa-check-circle"></i> Interior design consultation</li>
+                                <li><i class="fas fa-check-circle"></i> Flexible repayment options</li>
+                            </ul>
+                            <div class="product-actions">
+                                <button class="btn-apply" data-loan="Home Renovation Loan" data-interest="10.0% – 12.5% p.a.">Apply Now</button>
+                                <button class="btn-details">View Details</button>
+                            </div>
+                        </div>
+                        
+                        <div class="product-card">
+                            <div class="product-badge">Special Offer</div>
+                            <div class="product-icon">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </div>
+                            <h3 class="product-title">Plot Purchase Loan</h3>
+                            <div class="interest-rate">9.0% - 11.5% p.a.</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check-circle"></i> Up to 75% of plot value</li>
+                                <li><i class="fas fa-check-circle"></i> ₹3 Lakhs - ₹2 Crores</li>
+                                <li><i class="fas fa-check-circle"></i> Tenure: 3-20 years</li>
+                                <li><i class="fas fa-check-circle"></i> Legal verification included</li>
+                                <li><i class="fas fa-check-circle"></i> Balance transfer facility</li>
+                            </ul>
+                            <div class="product-actions">
+                                <button class="btn-apply" data-loan="Plot Purchase Loan" data-interest="9.0% – 11.5% p.a.">Apply Now</button>
+                                <button class="btn-details">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="home-loan">
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <div class="product-badge">Best Seller</div>
+                            <div class="product-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <h3 class="product-title">Ready-to-Move Home Loan</h3>
+                            <div class="interest-rate">8.75% - 10.25% p.a.</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check-circle"></i> Up to 90% of property value</li>
+                                <li><i class="fas fa-check-circle"></i> ₹10 Lakhs - ₹10 Crores</li>
+                                <li><i class="fas fa-check-circle"></i> Tenure: 5-30 years</li>
+                                <li><i class="fas fa-check-circle"></i> Property insurance included</li>
+                                <li><i class="fas fa-check-circle"></i> Top-up loan facility</li>
+                            </ul>
+                            <div class="product-actions">
+                                <button class="btn-apply" data-loan="Ready-to-Move Home Loan" data-interest="8.75% - 10.25% p.a.">
+                                    <i class="fas fa-file-signature"></i> Apply Now
+                                </button>
+                                <button class="btn-details">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="business-loan">
+                    <div class="product-grid">
+                        <div class="product-card">
+                            <div class="product-icon">
+                                <i class="fas fa-industry"></i>
+                            </div>
+                            <h3 class="product-title">Construction Business Loan</h3>
+                            <div class="interest-rate">11.0% - 14.5% p.a.</div>
+                            <ul class="product-features">
+                                <li><i class="fas fa-check-circle"></i> Up to ₹2 Crores</li>
+                                <li><i class="fas fa-check-circle"></i> For contractors & builders</li>
+                                <li><i class="fas fa-check-circle"></i> Flexible repayment cycles</li>
+                                <li><i class="fas fa-check-circle"></i> Working capital support</li>
+                                <li><i class="fas fa-check-circle"></i> Quick processing</li>
+                            </ul>
+                            <div class="product-actions">
+                                <button class="btn-apply" data-loan="Construction Business Loan" data-interest="11.0% - 14.5% p.a.">
+                                    <i class="fas fa-file-signature"></i> Apply Now
+                                </button>
+                                <button class="btn-details">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="application-form-container" id="applicationForm">
+        <div class="form-header">
+            <h2 class="form-title">Loan Application Form</h2>
+            <button class="close-form" id="closeForm">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="loan-type-display">
+            <h3>Applying for: <span id="selectedLoanType">New Construction Loan</span></h3>
+            <p>Interest Rate: <span id="selectedLoanInterest">8.5% – 10.5% p.a.</span></p>
+        </div>
+        
+        <form id="loanApplicationForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="fullName" class="required">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="required">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="phone" class="required">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="dob" class="required">Date of Birth</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="loanAmount" class="required">Desired Loan Amount (₹)</label>
+                    <input type="number" id="loanAmount" name="loanAmount" min="100000" step="10000" required>
+                    <p class="form-note">Minimum amount varies by loan type</p>
+                </div>
+                <div class="form-group">
+                    <label for="loanTenure" class="required">Preferred Tenure (Years)</label>
+                    <select id="loanTenure" name="loanTenure" required>
+                        <option value="">Select tenure</option>
+                        <option value="5">5 years</option>
+                        <option value="10">10 years</option>
+                        <option value="15">15 years</option>
+                        <option value="20">20 years</option>
+                        <option value="25">25 years</option>
+                        <option value="30">30 years</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="employment" class="required">Employment Type</label>
+                    <select id="employment" name="employment" required>
+                        <option value="">Select employment type</option>
+                        <option value="salaried">Salaried</option>
+                        <option value="self-employed">Self-Employed</option>
+                        <option value="business">Business Owner</option>
+                        <option value="professional">Professional</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="annualIncome" class="required">Annual Income (₹)</label>
+                    <input type="number" id="annualIncome" name="annualIncome" min="100000" step="10000" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="address" class="required">Residential Address</label>
+                <textarea id="address" name="address" rows="3" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="purpose">Purpose of Loan (Optional)</label>
+                <textarea id="purpose" name="purpose" rows="2" placeholder="Briefly describe how you plan to use the loan funds"></textarea>
+            </div>
+            
+            <div class="form-actions">
+                <button type="button" class="btn-cancel" id="cancelForm">Cancel</button>
+                <button type="submit" class="btn-submit">
+                    <i class="fas fa-paper-plane"></i> Submit Application
+                </button>
+            </div>
         </form>
-
-        <div class="small-note">
-          <i class="fas fa-lock"></i>
-          Your income & expense details are kept private and used only to prepare your plan.
-        </div>
-      </section>
     </div>
-  </main>
 
-  <script src="../assets/js/booking-storage.js"></script>
-  <script src="finance.js"></script>
+    <section id="emi-calculator" class="emi-calculator-section">
+        <div class="section-header">
+            <h2 class="section-title">EMI Calculator</h2>
+            <p class="section-subtitle">Calculate your monthly EMI and plan your finances better</p>
+        </div>
+        
+        <div class="calculator-container">
+            <div class="calculator-wrapper">
+                <div class="calculator-inputs">
+                    <h3>Calculate Your EMI</h3>
+                    
+                    <div class="input-group">
+                        <label for="calcLoanAmount">Loan Amount (₹)</label>
+                        <input type="number" id="calcLoanAmount" value="5000000" min="100000" max="50000000" step="100000">
+                        <input type="range" class="range-slider" id="loanAmountSlider" min="100000" max="50000000" step="100000" value="5000000">
+                        <div class="value-display">
+                            <span>₹1 Lakh</span>
+                            <span>₹5 Crores</span>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="interestRate">Interest Rate (% p.a.)</label>
+                        <input type="number" id="interestRate" value="8.5" min="5" max="20" step="0.1">
+                        <input type="range" class="range-slider" id="interestRateSlider" min="5" max="20" step="0.1" value="8.5">
+                        <div class="value-display">
+                            <span>5%</span>
+                            <span>20%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="calcLoanTenure">Loan Tenure (Years)</label>
+                        <input type="number" id="calcLoanTenure" value="20" min="1" max="30" step="1">
+                        <input type="range" class="range-slider" id="loanTenureSlider" min="1" max="30" step="1" value="20">
+                        <div class="value-display">
+                            <span>1 Year</span>
+                            <span>30 Years</span>
+                        </div>
+                    </div>
+                    
+                    <button class="calculate-btn" onclick="calculateEMI()">
+                        <i class="fas fa-calculator"></i> Calculate EMI
+                    </button>
+                </div>
+                
+                <div class="calculator-results">
+                    <div class="results-header">
+                        <h3>Your EMI Breakdown</h3>
+                        <p>Detailed calculation of your monthly payments</p>
+                    </div>
+                    
+                    <div class="results-grid">
+                        <div class="result-box">
+                            <div class="result-label">Monthly EMI</div>
+                            <div class="result-value" id="monthlyEmi">₹0</div>
+                        </div>
+                        
+                        <div class="result-box">
+                            <div class="result-label">Total Interest</div>
+                            <div class="result-value" id="totalInterest">₹0</div>
+                        </div>
+                        
+                        <div class="result-box">
+                            <div class="result-label">Total Payment</div>
+                            <div class="result-value" id="totalPayment">₹0</div>
+                        </div>
+                        
+                        <div class="result-box">
+                            <div class="result-label">Principal Amount</div>
+                            <div class="result-value" id="principalAmount">₹0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="breakdown-chart">
+                        <div class="breakdown-item">
+                            <span>Principal Amount</span>
+                            <span id="breakdownPrincipal">₹0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Total Interest Payable</span>
+                            <span id="breakdownInterest">₹0</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span>Total Amount Payable</span>
+                            <span id="breakdownTotal">₹0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="process-section">
+        <div class="section-header">
+            <h2 class="section-title" style="color: white;">Simple 4-Step Process</h2>
+            <p class="section-subtitle" style="color: rgba(255, 255, 255, 0.9);">Get your loan approved quickly and easily</p>
+        </div>
+        
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h3>Submit Application</h3>
+                <p>Fill our simple online form with basic details and required documents</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h3>Document Verification</h3>
+                <p>Our team verifies your documents and conducts background checks</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h3>Loan Sanction</h3>
+                <p>Receive loan approval with sanctioned amount and terms</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h3>Amount Disbursement</h3>
+                <p>Get funds transferred directly to your account within 72 hours</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">Ready to Start Your Construction Journey?</h2>
+            <p class="section-subtitle">Get the financial support you need with FastSewa's specialized loan solutions. Competitive rates, quick approvals, and dedicated support.</p>
+            
+            <div class="cta-buttons">
+                <a href="#loan-products" class="btn btn-primary" style="padding: 18px 40px;">
+                    <i class="fas fa-file-signature"></i> Apply for Loan
+                </a>
+                <a href="tel:+918275723755" class="btn" style="background: var(--accent); color: white; padding: 18px 40px;">
+                    <i class="fas fa-phone"></i> Call Now: +91 8275723755
+                </a>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="contact-section">
+        <div class="section-header">
+            <h2 class="section-title">Get in Touch</h2>
+            <p class="section-subtitle">Have questions? We are always here to help you.</p>
+        </div>
+
+        <div class="contact-container">
+            <div class="contact-info-box">
+                <div class="info-header">
+                    <h3>Contact Information</h3>
+                    <p>Fill up the form and our team will get back to you within 24 hours.</p>
+                </div>
+
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Phone</h4>
+                            <p>+91 8275723755</p>
+                            <p>+91 8275723755</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>support@fastsewa.com</p>
+                            <p>loans@fastsewa.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Office Address</h4>
+                            <p>B Hub Gandhi Maidan,<br>Patna, Bihar, India</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://www.facebook.com/fastsewa.20/" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/fastsewa2020" class="social-btn"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/fastsewa2020/" class="social-btn"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/fastsewa-facilities-2a062b2a2/"" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <div class="contact-form-wrapper">
+                <h3>Send us a Message</h3>
+                <form id="contactForm">
+                    <div class="form-grid">
+                        <input type="text" class="contact-input" placeholder="Your Name" required>
+                        <input type="text" class="contact-input" placeholder="Phone Number" required>
+                    </div>
+                    <div class="form-grid">
+                        <input type="email" class="contact-input" placeholder="Email Address" required>
+                        <input type="text" class="contact-input" placeholder="Subject">
+                    </div>
+                    <textarea class="contact-input" rows="5" placeholder="Write your message here..." style="margin-bottom: 20px; resize: none;"></textarea>
+                    
+                    <button type="submit" class="btn-send">
+                        Send Message <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col footer-brand">
+                <h2><i class="fas fa-hand-holding-usd"></i> FastSewa</h2>
+                <p>We provide the best financial solutions for your construction, home, and business needs. Trusted by thousands of customers across India.</p>
+            </div>
+
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="#loan-products"><i class="fas fa-chevron-right"></i> Our Loans</a></li>
+                    <li><a href="#emi-calculator"><i class="fas fa-chevron-right"></i> EMI Calculator</a></li>
+                    <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Loan Products</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Construction Loan</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Home Loan</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Business Loan</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Plot Purchase</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> FAQs</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Terms & Conditions</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Help Center</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 FastSewa Finance. All Rights Reserved.| Developed by Team Vivek Kumar</p>
+        </div>
+    </footer>
+    
+    <script>
+        // =================== //
+        // SLIDING IMAGES HERO //
+        // =================== //
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize hero slideshow
+            initHeroSlideshow();
+            
+            // Initialize loan tabs
+            initLoanTabs();
+            
+            // Initialize EMI calculator
+            initEMICalculator();
+            
+            // Initialize loan applications (Consolidated logic)
+            initLoanApplications();
+            
+            // Initial EMI calculation
+            setTimeout(calculateEMI, 500);
+        });
+        
+        // Hero Slideshow
+        function initHeroSlideshow() {
+            const slides = document.querySelectorAll('.hero-slide');
+            const dots = document.querySelectorAll('.hero-dot');
+            const prevBtn = document.getElementById('prev-hero-slide');
+            const nextBtn = document.getElementById('next-hero-slide');
+            
+            let currentSlide = 0;
+            let slideInterval;
+            
+            function showSlide(index) {
+                // Hide all slides
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                
+                // Show current slide
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+                currentSlide = index;
+            }
+            
+            function nextSlide() {
+                let nextIndex = (currentSlide + 1) % slides.length;
+                showSlide(nextIndex);
+            }
+            
+            function prevSlide() {
+                let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(prevIndex);
+            }
+            
+            // Auto slide every 5 seconds
+            function startSlideshow() {
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+            
+            // Event listeners
+            if(nextBtn) nextBtn.addEventListener('click', () => {
+                nextSlide();
+                startSlideshow();
+            });
+            
+            if(prevBtn) prevBtn.addEventListener('click', () => {
+                prevSlide();
+                startSlideshow();
+            });
+            
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showSlide(index);
+                    startSlideshow();
+                });
+            });
+            
+            // Pause on hover
+            const heroSection = document.querySelector('.hero-section');
+            if(heroSection) {
+                heroSection.addEventListener('mouseenter', () => clearInterval(slideInterval));
+                heroSection.addEventListener('mouseleave', startSlideshow);
+            }
+            
+            // Initialize
+            startSlideshow();
+        }
+        
+        // Loan Tabs
+        function initLoanTabs() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.getAttribute('data-tab');
+                    
+                    // Remove active class from all
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    button.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        }
+        
+        // EMI Calculator
+        function initEMICalculator() {
+            const loanAmount = document.getElementById('calcLoanAmount');
+            const interestRate = document.getElementById('interestRate');
+            const loanTenure = document.getElementById('calcLoanTenure');
+            
+            const loanAmountSlider = document.getElementById('loanAmountSlider');
+            const interestRateSlider = document.getElementById('interestRateSlider');
+            const loanTenureSlider = document.getElementById('loanTenureSlider');
+            
+            if(!loanAmount) return; // Guard clause if calculator not present
+            
+            // Sync sliders with inputs
+            loanAmount.addEventListener('input', function() {
+                loanAmountSlider.value = this.value;
+                calculateEMI();
+            });
+            
+            interestRate.addEventListener('input', function() {
+                interestRateSlider.value = this.value;
+                calculateEMI();
+            });
+            
+            loanTenure.addEventListener('input', function() {
+                loanTenureSlider.value = this.value;
+                calculateEMI();
+            });
+            
+            loanAmountSlider.addEventListener('input', function() {
+                loanAmount.value = this.value;
+                calculateEMI();
+            });
+            
+            interestRateSlider.addEventListener('input', function() {
+                interestRate.value = this.value;
+                calculateEMI();
+            });
+            
+            loanTenureSlider.addEventListener('input', function() {
+                loanTenure.value = this.value;
+                calculateEMI();
+            });
+        }
+        
+        function calculateEMI() {
+            const loanAmountEl = document.getElementById('calcLoanAmount');
+            if(!loanAmountEl) return;
+
+            const principal = parseFloat(loanAmountEl.value) || 5000000;
+            const rate = parseFloat(document.getElementById('interestRate').value) || 8.5;
+            const years = parseFloat(document.getElementById('calcLoanTenure').value) || 20;
+            
+            // Convert annual rate to monthly and years to months
+            const monthlyRate = rate / 12 / 100;
+            const months = years * 12;
+            
+            // EMI calculation formula
+            const emi = principal * monthlyRate * Math.pow(1 + monthlyRate, months) / 
+                        (Math.pow(1 + monthlyRate, months) - 1);
+            
+            const totalPayment = emi * months;
+            const totalInterest = totalPayment - principal;
+            
+            // Format currency
+            const formatter = new Intl.NumberFormat('en-IN', {
+                style: 'currency',
+                currency: 'INR',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+            
+            // Update results
+            document.getElementById('monthlyEmi').textContent = formatter.format(emi);
+            document.getElementById('totalInterest').textContent = formatter.format(totalInterest);
+            document.getElementById('totalPayment').textContent = formatter.format(totalPayment);
+            document.getElementById('principalAmount').textContent = formatter.format(principal);
+            
+            document.getElementById('breakdownPrincipal').textContent = formatter.format(principal);
+            document.getElementById('breakdownInterest').textContent = formatter.format(totalInterest);
+            document.getElementById('breakdownTotal').textContent = formatter.format(totalPayment);
+        }
+        
+        // Unified Loan Application Logic
+        function initLoanApplications() {
+            const applicationForm = document.getElementById('applicationForm');
+            const applyButtons = document.querySelectorAll('.btn-apply');
+            const closeFormButton = document.getElementById('closeForm');
+            const cancelFormButton = document.getElementById('cancelForm');
+            const loanApplicationForm = document.getElementById('loanApplicationForm');
+            const selectedLoanType = document.getElementById('selectedLoanType');
+            const selectedLoanInterest = document.getElementById('selectedLoanInterest');
+            const detailButtons = document.querySelectorAll('.btn-details');
+            
+            if(!applicationForm) return;
+
+            // Show form when Apply Now is clicked
+            applyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const loanType = this.getAttribute('data-loan');
+                    // Default text if data-interest is missing
+                    const interestRate = this.getAttribute('data-interest') || "Rates vary";
+                    
+                    // Update form header
+                    if(selectedLoanType) selectedLoanType.textContent = loanType;
+                    if(selectedLoanInterest) selectedLoanInterest.textContent = interestRate;
+                    
+                    // Show the form
+                    applicationForm.style.display = 'block';
+                    
+                    // Scroll to form
+                    applicationForm.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // View Details Logic (Simple Alert for now, can be expanded)
+            detailButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const card = this.closest('.product-card');
+                    const title = card.querySelector('.product-title').textContent;
+                    const features = card.querySelector('.product-features').innerText;
+                    alert(`Details for ${title}:\n\n${features}`);
+                });
+            });
+            
+            // Close form button
+            if(closeFormButton) {
+                closeFormButton.addEventListener('click', function() {
+                    applicationForm.style.display = 'none';
+                });
+            }
+            
+            // Cancel form button
+            if(cancelFormButton) {
+                cancelFormButton.addEventListener('click', function() {
+                    applicationForm.style.display = 'none';
+                    loanApplicationForm.reset();
+                });
+            }
+            
+            // Form submission
+            if(loanApplicationForm) {
+                loanApplicationForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Basic validation
+                    let isValid = true;
+                    const requiredFields = this.querySelectorAll('[required]');
+                    
+                    requiredFields.forEach(field => {
+                        if (!field.value.trim()) {
+                            isValid = false;
+                            field.style.borderColor = '#e74c3c';
+                        } else {
+                            field.style.borderColor = '#ddd';
+                        }
+                    });
+                    
+                    if (!isValid) {
+                        alert('Please fill in all required fields.');
+                        return;
+                    }
+                    
+                    // Success message
+                    const formData = new FormData(this);
+                    const applicantName = formData.get('fullName');
+                    
+                    alert(`Thank you ${applicantName}! Your application for ${selectedLoanType.textContent} has been submitted successfully. We will contact you within 24 hours.`);
+                    
+                    // Reset and hide form
+                    this.reset();
+                    applicationForm.style.display = 'none';
+                });
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        // Contact Form Submission
+const contactForm = document.getElementById('contactForm');
+if(contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you for contacting FastSewa! We have received your message and will get back to you shortly.');
+        this.reset();
+    });
+}
+    </script>
 </body>
 </html>
-
