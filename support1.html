@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastSewa - Support & Solutions Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #2ec4b6;
+            --accent: #ff9f1c;
+            --dark: #011627;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --gradient: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            --gradient-secondary: linear-gradient(135deg, #2ec4b6 0%, #20a39e 100%);
+            --gradient-accent: linear-gradient(135deg, #ff9f1c 0%, #ffbf69 100%);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+            --radius: 16px;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.7;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            background: var(--gradient);
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .logo:hover .logo-icon {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .logo-text {
+            font-size: 26px;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 16px;
+            position: relative;
+            padding: 8px 0;
+            transition: var(--transition);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .services-dropdown {
+            position: relative;
+        }
+
+        .dropdown-toggle {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 250px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-hover);
+            padding: 15px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 100;
+        }
+
+        .services-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--light-gray);
+            color: var(--primary);
+        }
+
+        .dropdown-menu i {
+            width: 20px;
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(67, 97, 238, 0.4);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--light-gray);
+            transition: var(--transition);
+        }
+
+        /* UPDATED: Hero Section with Sliding Images */
+        .hero {
+            padding: 180px 0 120px;
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
+            min-height: 800px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 20px;
+            opacity: 0.95;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero .btn-primary {
+            background: rgba(67, 97, 238, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero .btn-primary:hover {
+            background: rgba(67, 97, 238, 1);
+        }
+
+        .hero .btn-secondary {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: white;
+        }
+
+        .hero-controls {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            width: 100%;
+            z-index: 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .hero-dots {
+            display: flex;
+            gap: 10px;
+        }
+
+        .hero-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .hero-dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
+
+        .hero-nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+
+        .hero-nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* Service Cards Section */
+        .all-services-section {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-header {
+            padding: 25px 30px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            min-height: 100px;
+        }
+
+        .service-header i {
+            font-size: 28px;
+        }
+
+        .service-body {
+            padding: 30px;
+        }
+
+        .service-body h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .service-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .service-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-features i {
+            color: var(--secondary);
+        }
+
+        .service-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 6px;
+        }
+
+        /* Verification Process Section */
+        .verification-section {
+            padding: 80px 0;
+            background: var(--light);
+        }
+
+        .verification-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .verification-step {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .verification-step:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-top: 50px;
+        }
+
+        .contact-info h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: var(--light);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .contact-method:hover {
+            transform: translateX(10px);
+            background: white;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-method i {
+            color: var(--primary);
+            font-size: 20px;
+            margin-top: 5px;
+        }
+
+        .contact-form {
+            background: var(--light);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+
+        .service-select {
+            background: white;
+            border: 1px solid var(--light-gray);
+            padding: 12px 15px;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .submit-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: white;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradient);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: #b0b7c3;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-column a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* Floating Animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            nav {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: var(--transition);
+                z-index: 999;
+            }
+
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            nav li {
+                width: 100%;
+            }
+
+            nav a {
+                display: block;
+                padding: 15px 0;
+                border-bottom: 1px solid var(--light-gray);
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding-left: 20px;
+                background: var(--light);
+            }
+
+            .hero {
+                padding: 150px 0 80px;
+                height: auto;
+                min-height: 700px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-controls {
+                bottom: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .service-actions {
+                flex-direction: column;
+            }
+
+            .hero-nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="logo-text">Fast<span>Sewa</span></div>
+                </a>
+                
+                <nav id="main-nav">
+                    <ul>
+                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                        <li class="services-dropdown">
+                            <a href="#all-services" class="dropdown-toggle">
+                                <i class="fas fa-th-large"></i> All Services <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a href="#construction"><i class="fas fa-hammer"></i> Construction</a>
+                                <a href="#security"><i class="fas fa-shield-alt"></i> Security</a>
+                                <a href="#legal"><i class="fas fa-gavel"></i> Legal & GST</a>
+                                <a href="#medical"><i class="fas fa-stethoscope"></i> Medical Services</a>
+                                <a href="#land"><i class="fas fa-map-marked-alt"></i> Land Verification</a>
+                                <a href="#repair"><i class="fas fa-tools"></i> Repair & Maintenance</a>
+                                <a href="#finance"><i class="fas fa-chart-line"></i> Finance Assistant</a>
+                                <a href="#materials"><i class="fas fa-boxes"></i> Material Suppliers</a>
+                            </div>
+                        </li>
+                        <li><a href="#verification"><i class="fas fa-user-check"></i> Verification</a></li>
+                        <li><a href="#contact"><i class="fas fa-headset"></i> Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <a href="tel:+918275723755" class="btn btn-primary"><i class="fas fa-phone"></i> Call Now</a>
+                    <button class="mobile-menu-btn" id="mobile-menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- UPDATED: Hero Section with Sliding Images -->
+    <section class="hero">
+        <div class="hero-slideshow">
+            <!-- Slide 1: Construction Service -->
+            <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+            
+            <!-- Slide 2: Security Service -->
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+            
+            <!-- Slide 3: Medical Service -->
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1516549655669-df6654e435f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+            
+            <!-- Slide 4: Legal Service -->
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+            
+            <!-- Slide 5: Repair Service -->
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+        </div>
+        
+        <div class="hero-content animate__animated animate__fadeInUp">
+            <h1>Complete Support for All <span class="floating">FastSewa</span> Services</h1>
+            <p>Your trusted partner for construction, security, legal, healthcare, land verification, maintenance, finance, and material solutions. Get 24/7 support for all 8 essential services.</p>
+            <div class="hero-btns">
+                <a href="#all-services" class="btn btn-primary"><i class="fas fa-th-large"></i> Explore All Services</a>
+                <a href="#contact" class="btn btn-secondary"><i class="fas fa-phone-alt"></i> Emergency Support</a>
+            </div>
+        </div>
+        
+        <div class="hero-controls">
+            <button class="hero-nav-btn" id="prev-hero-slide">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            
+            <div class="hero-dots">
+                <div class="hero-dot active" data-slide="0"></div>
+                <div class="hero-dot" data-slide="1"></div>
+                <div class="hero-dot" data-slide="2"></div>
+                <div class="hero-dot" data-slide="3"></div>
+                <div class="hero-dot" data-slide="4"></div>
+            </div>
+            
+            <button class="hero-nav-btn" id="next-hero-slide">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- All Services Section -->
+    <section class="all-services-section" id="all-services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">8 Essential FastSewa Services</h2>
+                <p class="section-subtitle">Complete solutions for construction, security, legal, medical, land verification, maintenance, finance, and materials</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Construction Service -->
+                <div class="service-card" id="construction">
+                    <div class="service-header" style="background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);">
+                        <i class="fas fa-hammer"></i>
+                        <h3>FastSewa BuildNet</h3>
+                    </div>
+                    <div class="service-body">
+                        <h3>Construction & Renovation</h3>
+                        <p>Complete house, renovation & commercial construction solutions with end-to-end project management.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Free site inspection & consultation</li>
+                            <li><i class="fas fa-check"></i> Transparent cost estimation</li>
+                            <li><i class="fas fa-check"></i> Certified contractors & architects</li>
+                            <li><i class="fas fa-check"></i> Quality material assurance</li>
+                            <li><i class="fas fa-check"></i> Timely project completion</li>
+                        </ul>
+                        <div class="service-actions">
+                            <a href="construction.html" class="btn btn-primary btn-small"><i class="fas fa-calendar-check"></i> Book Inspection</a>
+                            <a href="tel:+918275723755" class="btn btn-small" style="background: var(--light-gray); color: var(--dark);"><i class="fas fa-phone"></i> Call Expert</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Security Service -->
+                <div class="service-card" id="security">
+                    <div class="service-header" style="background: linear-gradient(135deg, #2ec4b6 0%, #20a39e 100%);">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>SecureForce</h3>
+                    </div>
+                    <div class="service-body">
+                        <h3>Security Guard Services</h3>
+                        <p>Professional trained security guards for residential, commercial, and event security requirements.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Background verified personnel</li>
+                            <li><i class="fas fa-check"></i> 24/7 monitoring available</li>
+                            <li><i class="fas fa-check"></i> Emergency response training</li>
+                            <li><i class="fas fa-check"></i> Flexible deployment options</li>
+                            <li><i class="fas fa-check"></i> Regular performance audits</li>
+                        </ul>
+                        <div class="service-actions">
+                            <a href="security.html" class="btn btn-primary btn-small"><i class="fas fa-user-shield"></i> Request Guards</a>
+                            <a href="tel:+918275723755" class="btn btn-small" style="background: var(--light-gray); color: var(--dark);"><i class="fas fa-phone"></i> Urgent Security</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Legal & GST Service -->
+                <div class="service-card" id="legal">
+                    <div class="service-header" style="background: linear-gradient(135deg, #7209b7 0%, #560bad 100%);">
+                        <i class="fas fa-gavel"></i>
+                        <h3>FastSewa Filings</h3>
+                    </div>
+                    <div class="service-body">
+                        <h3>Legal & GST Services</h3>
+                        <p>Comprehensive GST, tax filing, legal documentation, and compliance services for businesses and individuals.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> GST registration & filing</li>
+                            <li><i class="fas fa-check"></i> Income tax returns</li>
+                            <li><i class="fas fa-check"></i> Legal documentation</li>
+                            <li><i class="fas fa-check"></i> Compliance advisory</li>
+                            <li><i class="fas fa-check"></i> CA consultation available</li>
+                        </ul>
+                        <div class="service-actions">
+                            <a href="legal.html" class="btn btn-primary btn-small"><i class="fas fa-file-contract"></i> Start Filing</a>
+                            <a href="mailto:Fastsewa2020@gmail.com" class="btn btn-small" style="background: var(--light-gray); color: var(--dark);"><i class="fas fa-envelope"></i> Email Query</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Medical Services -->
+                <div class="service-card" id="medical">
+                    <div class="service-header" style="background: linear-gradient(135deg, #f72585 0%, #b5179e 100%);">
+                        <i class="fas fa-stethoscope"></i>
+                        <h3>Medical Services</h3>
+                    </div>
+                    <div class="service-body">
+                        <h3>Healthcare at Your Doorstep</h3>
+                        <p>Doctors, nurses, and health assistance at your doorstep with emergency and routine care options.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Doctor home visits</li>
+                            <li><i class="fas fa-check"></i> Nursing care services</li>
+                            <li><i class="fas fa-check"></i> Medical equipment rental</li>
+                            <li><i class="fas fa-check"></i> Emergency response</li>
+                            <li><i class="fas fa-check"></i> Pharmacy coordination</li>
+                        </ul>
+                        <div class="service-actions">
+                            <a href="tel:+918275723755" class="btn btn-primary btn-small"><i class="fas fa-ambulance"></i> Emergency Call</a>
+                            <a href="medical.html" class="btn btn-small" style="background: var(--light-gray); color: var(--dark);"><i class="fas fa-calendar"></i> Schedule Visit</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Land Verification -->
+                <div class="service-card" id="land">
+                    <div class="service-header" style="background: linear-gradient(135deg, #4cc9f0 0%, #4895ef 100%);">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <h3>Land Verification</h3>
+                    </div>
+                    <div class="service-body">
+                        <h3>Property Document Verification</h3>
+                        <p>Comprehensive land record checks, property document verification, and legal due diligence services.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Title deed verification</li>
+                            <li><i class="fas fa-check"></i> Encumbrance certificate</li>
+                            <li><i class="fas fa-check"></i> Property tax status</li>
+                            <li><i class="fas fa-check"></i> Legal opinion report</li>
+                            <li><i class="fas fa-check"></i> Site inspection report</li>
+                        </ul>
+                        <div class="service-actions">
+                            <a href="land.html" class="btn btn-primary btn-small"><i class="fas fa-search"></i> Start Verification</a>
+                            <a href="mailto:Fastsewa2020@gmail.com" class="btn btn-small" style="background: var(--light-gray); color: var(--dark);"><i class="fas fa-file-upload"></i> Upload Documents</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Repair & Maintenance -->
+                <div class="service-card" id="repair">
+                    <div class="service-header" style="background: linear-gradient(135deg, #ff9f1c 0%, #ffbf69 100%);">
+                        <i class="fas fa-tools"></i>
+                        <h3>Repair & Maintenance</h3>
+                    </div>
+                    <div class="service-body">
+                        <h3>Home & Office Repairs</h3>
+                        <p>Comprehensive repair and maintenance services for homes and offices by certified technicians.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Electrical repairs</li>
+                            <li><i class="fas fa-check"></i> Plumbing services</li>
+                            <li><i class="fas fa-check"></i> Appliance maintenance</li>
+                            <li><i class="fas fa-check"></i> Carpentry work</li>
+                            <li><i class="fas fa-check"></i> Same-day service available</li>
+                        </ul>
+                        <div class="service-actions">
+                            <a href="tel:+918275723755" class="btn btn-primary btn-small"><i class="fas fa-wrench"></i> Book Repair</a>
+                            <a href="repair.html" class="btn btn-small" style="background: var(--light-gray); color: var(--dark);"><i class="fas fa-headset"></i> Instant Chat</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Finance Assistant -->
+                <div class="service-card" id="finance">
+                    <div class="service-header" style="background: linear-gradient(135deg, #06d6a0 0%, #04a777 100%);">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Finance Assistant</h3>
+                    </div>
+                    <div class="service-body">
+                        <h3>Financial Planning Services</h3>
+                        <p>Personal budgeting, EMI planning, savings guidance, and financial advisory services.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Personal budget creation</li>
+                            <li><i class="fas fa-check"></i> EMI planning & management</li>
+                            <li><i class="fas fa-check"></i> Savings strategy</li>
+                            <li><i class="fas fa-check"></i> Investment guidance</li>
+                            <li><i class="fas fa-check"></i> Tax planning assistance</li>
+                        </ul>
+                        <div class="service-actions">
+                            <a href="finance.html" class="btn btn-primary btn-small"><i class="fas fa-calculator"></i> Financial Checkup</a>
+                            <a href="mailto:Fastsewa2020@gmail.com" class="btn btn-small" style="background: var(--light-gray); color: var(--dark);"><i class="fas fa-question-circle"></i> Ask Expert</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Material Suppliers -->
+                <div class="service-card" id="materials">
+                    <div class="service-header" style="background: linear-gradient(135deg, #6a4c93 0%, #543c7a 100%);">
+                        <i class="fas fa-boxes"></i>
+                        <h3>Material Suppliers</h3>
+                    </div>
+                    <div class="service-body">
+                        <h3>Construction Materials</h3>
+                        <p>High-quality construction materials delivered directly to your site with competitive pricing.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> Cement, steel, bricks</li>
+                            <li><i class="fas fa-check"></i> Electrical & plumbing materials</li>
+                            <li><i class="fas fa-check"></i> Sanitary ware & fixtures</li>
+                            <li><i class="fas fa-check"></i> Paints & finishes</li>
+                            <li><i class="fas fa-check"></i> Timely delivery guarantee</li>
+                        </ul>
+                        <div class="service-actions">
+                            <a href="material.html" class="btn btn-primary btn-small"><i class="fas fa-shopping-cart"></i> Order Materials</a>
+                            <a href="tel:+918275723755" class="btn btn-small" style="background: var(--light-gray); color: var(--dark);"><i class="fas fa-phone"></i> Get Quote</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Verification Process Section -->
+    <section class="verification-section" id="verification">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Verified Professionals Process</h2>
+                <p class="section-subtitle">All FastSewa service providers go through a rigorous 5-step verification process</p>
+            </div>
+            
+            <div class="verification-steps">
+                <div class="verification-step">
+                    <div class="step-number">1</div>
+                    <h3>Background Check</h3>
+                    <p>Comprehensive criminal record and employment history verification</p>
+                </div>
+                <div class="verification-step">
+                    <div class="step-number">2</div>
+                    <h3>Skill Assessment</h3>
+                    <p>Practical tests and certification validation for each service category</p>
+                </div>
+                <div class="verification-step">
+                    <div class="step-number">3</div>
+                    <h3>Document Verification</h3>
+                    <p>ID proof, address proof, and professional certifications checked</p>
+                </div>
+                <div class="verification-step">
+                    <div class="step-number">4</div>
+                    <h3>Training & Orientation</h3>
+                    <p>FastSewa service standards, customer handling, and safety training</p>
+                </div>
+                <div class="verification-step">
+                    <div class="step-number">5</div>
+                    <h3>Ongoing Monitoring</h3>
+                    <p>Regular performance reviews and customer feedback analysis</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Contact FastSewa Support</h2>
+                <p class="section-subtitle">Get personalized assistance for any of our 8 services with 24/7 availability</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Service-Specific Support</h3>
+                    
+                    <div class="contact-method">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Emergency Hotline</h4>
+                            <p><strong>+91 8275723755</strong></p>
+                            <p>For Medical, Security & Urgent Repair services</p>
+                            <p style="font-size: 14px; color: var(--accent);"><i class="fas fa-clock"></i> 24/7 Available</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Document Services</h4>
+                            <p><strong>Fastsewa2020@gmail.com</strong></p>
+                            <p>For Legal, Land Verification & Finance services</p>
+                            <p style="font-size: 14px;"><i class="fas fa-paperclip"></i> Attach documents for faster response</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <i class="fas fa-calendar-alt"></i>
+                        <div>
+                            <h4>Consultation Booking</h4>
+                            <p><strong>Construction & Material Services</strong></p>
+                            <p>Schedule site visits and consultations</p>
+                            <p style="font-size: 14px;"><i class="fas fa-map-marker-alt"></i> B Hub, Gandhi Maidan, Patna, Bihar</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-method">
+                        <i class="fas fa-comments"></i>
+                        <div>
+                            <h4>AI Support Assistant</h4>
+                            <p><strong>FastSewa AI Assistant</strong></p>
+                            <p>Instant answers for all 6 services</p>
+                            <p style="font-size: 14px; color: var(--secondary);"><i class="fas fa-robot"></i> Available 24/7</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Send Service Request</h3>
+                    <form id="serviceRequestForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" required placeholder="Enter your full name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" required placeholder="Enter 10-digit mobile number">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="service">Select Service Needed</label>
+                            <select id="service" class="service-select" required>
+                                <option value="">Choose a service</option>
+                                <option value="construction">Construction & Renovation</option>
+                                <option value="security">Security Guard Services</option>
+                                <option value="legal">Legal & GST Services</option>
+                                <option value="medical">Medical Services</option>
+                                <option value="land">Land Verification</option>
+                                <option value="repair">Repair & Maintenance</option>
+                                <option value="finance">Finance Assistant</option>
+                                <option value="materials">Material Suppliers</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="urgency">Urgency Level</label>
+                            <select id="urgency" class="service-select">
+                                <option value="normal">Normal (24-48 hours)</option>
+                                <option value="urgent">Urgent (Same day)</option>
+                                <option value="emergency">Emergency (Immediate)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Service Details</label>
+                            <textarea id="message" rows="4" required placeholder="Describe your requirement in detail..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Submit Service Request
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>FastSewa</h3>
+                    <p>Your trusted partner for 8 essential services since 2020. Quality, reliability, and customer satisfaction guaranteed.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Services</h3>
+                    <ul>
+                        <li><a href="#construction"><i class="fas fa-chevron-right"></i> Construction</a></li>
+                        <li><a href="#security"><i class="fas fa-chevron-right"></i> Security Guards</a></li>
+                        <li><a href="#medical"><i class="fas fa-chevron-right"></i> Medical Services</a></li>
+                        <li><a href="#repair"><i class="fas fa-chevron-right"></i> Repair & Maintenance</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Document Services</h3>
+                    <ul>
+                        <li><a href="#legal"><i class="fas fa-chevron-right"></i> Legal & GST</a></li>
+                        <li><a href="#land"><i class="fas fa-chevron-right"></i> Land Verification</a></li>
+                        <li><a href="#finance"><i class="fas fa-chevron-right"></i> Finance Assistant</a></li>
+                        <li><a href="#materials"><i class="fas fa-chevron-right"></i> Material Suppliers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact & Support</h3>
+                    <ul>
+                        <li><a href="tel:+918275723755"><i class="fas fa-phone"></i> +91 8275723755</a></li>
+                        <li><a href="mailto:Fastsewa2020@gmail.com"><i class="fas fa-envelope"></i> Fastsewa2020@gmail.com</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> B Hub, Gandhi Maidan, Patna</a></li>
+                        <li><a href="#"><i class="fas fa-headset"></i> 24/7 Customer Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 FastSewa. All rights reserved. | <a href="#" style="color: #94a3b8;">Privacy Policy</a> | <a href="#" style="color: #94a3b8;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mainNav = document.getElementById('main-nav');
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            mobileMenuToggle.innerHTML = mainNav.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // NEW: Hero Sliding Images
+        const heroSlides = document.querySelectorAll('.hero-slide');
+        const heroDots = document.querySelectorAll('.hero-dot');
+        const prevHeroBtn = document.getElementById('prev-hero-slide');
+        const nextHeroBtn = document.getElementById('next-hero-slide');
+        let currentHeroSlide = 0;
+        let heroSlideInterval;
+
+        function initHeroSlideshow() {
+            updateHeroSlide();
+            startHeroSlideshow();
+        }
+
+        function updateHeroSlide() {
+            // Hide all slides
+            heroSlides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Show current slide
+            heroSlides[currentHeroSlide].classList.add('active');
+            
+            // Update dots
+            heroDots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            heroDots[currentHeroSlide].classList.add('active');
+        }
+
+        function nextHeroSlide() {
+            currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
+            updateHeroSlide();
+        }
+
+        function prevHeroSlide() {
+            currentHeroSlide = (currentHeroSlide - 1 + heroSlides.length) % heroSlides.length;
+            updateHeroSlide();
+        }
+
+        function startHeroSlideshow() {
+            clearInterval(heroSlideInterval);
+            heroSlideInterval = setInterval(nextHeroSlide, 5000);
+        }
+
+        // Event listeners for hero controls
+        nextHeroBtn.addEventListener('click', () => {
+            nextHeroSlide();
+            startHeroSlideshow();
+        });
+
+        prevHeroBtn.addEventListener('click', () => {
+            prevHeroSlide();
+            startHeroSlideshow();
+        });
+
+        // Dot click events for hero
+        heroDots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                currentHeroSlide = parseInt(this.getAttribute('data-slide'));
+                updateHeroSlide();
+                startHeroSlideshow();
+            });
+        });
+
+        // Pause slideshow on hover
+        const heroSection = document.querySelector('.hero');
+        heroSection.addEventListener('mouseenter', () => {
+            clearInterval(heroSlideInterval);
+        });
+
+        heroSection.addEventListener('mouseleave', () => {
+            startHeroSlideshow();
+        });
+
+        // Service request form submission
+        document.getElementById('serviceRequestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const service = document.getElementById('service').value;
+            const urgency = document.getElementById('urgency').value;
+            const phone = document.getElementById('phone').value;
+            
+            // Show success message
+            alert(`Thank you! Your ${service} request has been submitted with ${urgency} priority. Our team will contact you at ${phone} within the next hour.`);
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+
+        // Service card hover effects
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+        });
+
+        // Initialize hero slideshow
+        document.addEventListener('DOMContentLoaded', function() {
+            initHeroSlideshow();
+        });
+    </script>
+</body>
+</html>
