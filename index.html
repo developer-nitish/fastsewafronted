@@ -434,44 +434,148 @@ document.getElementById("contactForm").addEventListener("submit", function (e) {
 <!-- ==================== -->
 <!-- FASTSEWA CHATBOT HTML -->
 <!-- ==================== -->
-<button class="fastsewa-chatbot-toggle" id="fastsewaChatbotToggle">
-    <i class="fas fa-headset"></i>
-    <span class="notification-badge">1</span>
+<button class="fastsewa-chatbot-toggle" id="toggleBtn">
+  <i class="fas fa-headset"></i>
 </button>
 
-<div class="fastsewa-chatbot-container" id="fastsewaChatbotContainer">
-    <!-- Header -->
-    <div class="fastsewa-chatbot-header">
-        <div class="chatbot-header-content">
-            <div class="chatbot-avatar">
-                <i class="fas fa-robot"></i>
-            </div>
-            <div>
-                <h3>FastSewa Assistant</h3>
-                <p>AI Support for 6 Services</p>
-            </div>
-        </div>
-        <button class="chatbot-close-btn" id="chatbotCloseBtn">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
+<div class="fastsewa-chatbot-container" id="chatbox">
 
-    <!-- Messages Container -->
-    <div class="fastsewa-chatbot-body" id="chatbotMessages">
-        <!-- Initial message will appear here -->
-    </div>
+  <div class="fastsewa-chatbot-header">
+    <b>FastSewa Assistant</b>
+    <button id="closeBtn">✕</button>
+  </div>
 
-    <!-- Input Area -->
-    <div class="fastsewa-chatbot-footer">
-        <input type="text" id="chatbotInput" placeholder="Ask about our services...">
-        <button id="chatbotSendBtn">
-            <i class="fas fa-paper-plane"></i>
-        </button>
-    </div>
+  <div class="fastsewa-chatbot-body" id="chatBody"></div>
+
+  <div class="fastsewa-chatbot-footer">
+    <input id="chatInput" class="fastsewa-chatbot-input" placeholder="Type message..." />
+    <button class="fastsewa-chatbot-send-btn" onclick="sendMessage()">
+      <i class="fas fa-paper-plane"></i>
+    </button>
+  </div>
 </div>
 
+<script>
+  // ✅ Backend URL
+  const API = "https://fastsewabackend-production.up.railway.app/api";
+
+  // ✅ DOM Elements
+  const chatbox = document.getElementById("chatbox");
+  const chatBody = document.getElementById("chatBody");
+  const input = document.getElementById("chatInput");
+  const toggleBtn = document.getElementById("toggleBtn");
+  const closeBtn = document.getElementById("closeBtn");
+
+  // ✅ Mapping Logic (Button Key -> Full Sentence)
+  const servicePrompts = {
+    construction: "I want construction",
+    security: "Need security guard",
+    medical: "I need a doctor",
+    legal: "Legal help",
+    land: "Land verification",
+    finance: "Finance assistant",
+    vendor: "I want to register as a vendor",
+    repair: "I need repair services"
+  };
+
+  // 1. Toggle Chatbox
+  toggleBtn.onclick = () => {
+    // Agar 'flex' hai to hide karein, nahi to show karein
+    if(chatbox.style.display === "flex"){
+        chatbox.style.display = "none";
+    } else {
+        chatbox.style.display = "flex";
+        // Agar pehli baar khul raha hai aur khali hai, to init karein
+        if(chatBody.innerHTML.trim() === "") initChat();
+    }
+  };
+  
+  closeBtn.onclick = () => {
+    chatbox.style.display = "none";
+  };
+
+  // 2. Add Message Function
+  function addMsg(text, type) {
+    const div = document.createElement("div");
+    div.className = "fastsewa-message " + (type === "bot" ? "fastsewa-bot-message" : "fastsewa-user-message");
+    div.innerHTML = text;
+    chatBody.appendChild(div);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  // 3. Main Send Function
+  // 'key' parameter optional hai (buttons ke liye use hoga)
+  window.sendMessage = async function(key) {
+    let msg = "";
+
+    // Check karein button click hua hai ya type kiya hai
+    if (key && servicePrompts[key]) {
+      msg = servicePrompts[key]; // Button ka mapped text lein
+    } else {
+      msg = input.value.trim(); // Input box ka text lein
+    }
+
+    if (!msg) return;
+
+    // UI Update
+    addMsg(msg, "user");
+    input.value = "";
+
+    try {
+      // API Call
+      const res = await fetch(`${API}/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: msg })
+      });
+
+      const data = await res.json();
+      
+      // Bot Response
+      addMsg(data.response || "Sorry, I didn't understand.", "bot");
+
+      // PDF Link Check
+      if (data.pdf_generated && data.pdf_file) {
+        addMsg(
+          `<a class="pdf-download-btn" target="_blank"
+          href="${API}/download-pdf/${data.pdf_file}">
+          📄 Download PDF</a>`, "bot"
+        );
+      }
+
+    } catch (err) {
+      console.error(err);
+      addMsg("❌ Backend connection failed. Please try again.", "bot");
+    }
+  };
+
+  // 4. Handle Enter Key
+  input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") sendMessage();
+  });
+
+  // 5. Initial Welcome Message with Buttons
+  function initChat() {
+    addMsg("👋 Welcome to FastSewa! Please select a service:", "bot");
     
-    <script src="script.js"></script>
-    <script src="chatbot.js"></script>
+    // Buttons Inject Karein
+    addMsg(`
+      <div class="service-buttons">
+        <button class="service-btn" onclick="sendMessage('construction')">🏗 Construction</button>
+        <button class="service-btn" onclick="sendMessage('security')">🛡 Security</button>
+        <button class="service-btn" onclick="sendMessage('medical')">🏥 Medical</button>
+        <button class="service-btn" onclick="sendMessage('legal')">⚖ Legal & GST</button>
+        <button class="service-btn" onclick="sendMessage('land')">📋 Land</button>
+        <button class="service-btn" onclick="sendMessage('finance')">💰 Finance</button>
+        <button class="service-btn" onclick="sendMessage('repair')">🔧 Repair</button>
+        <button class="service-btn" onclick="sendMessage('vendor')">🤝 Vendor Reg.</button>
+      </div>
+    `, "bot");
+  }
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
 </body>
 </html>
