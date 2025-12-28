@@ -1,277 +1,172 @@
-/* ==================== */
-/* FASTSEWA CHATBOT CSS */
-/* ==================== */
+:root {
+  /* ✅ COLOR CHANGE: Blue hata kar Saffron/Orange kar diya */
+  --primary: #ff5722; 
+  --dark: #1f2937;
+  --border: #e5e7eb;
+}
 
-/* Chatbot Toggle Button */
+/* Toggle Button */
 .fastsewa-chatbot-toggle {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
-    color: white;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    z-index: 10000;
-    transition: all 0.3s ease;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 99999;
+  transition: transform 0.2s;
 }
 
 .fastsewa-chatbot-toggle:hover {
-    transform: scale(1.1);
-    box-shadow: 0 15px 30px rgba(37, 99, 235, 0.4);
+  transform: scale(1.05);
 }
 
-.fastsewa-chatbot-toggle .notification-badge {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background-color: #ef4444;
-    color: white;
-    border-radius: 50%;
-    width: 22px;
-    height: 22px;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid white;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-/* Chatbot Container */
+/* Chat Container */
 .fastsewa-chatbot-container {
-    position: fixed;
-    bottom: 100px;
-    right: 30px;
-    width: 380px;
-    max-width: calc(100vw - 60px);
-    height: 580px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    display: none;
-    flex-direction: column;
-    z-index: 9999;
-    border: 1px solid #e5e7eb;
-    overflow: hidden;
+  position: fixed;
+  bottom: 100px;
+  right: 25px;
+  width: 380px;
+  height: 600px;
+  max-height: 80vh;
+  background: #fff;
+  display: none;
+  flex-direction: column;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  z-index: 99999;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* Chatbot Header */
+/* Header */
 .fastsewa-chatbot-header {
-    background: linear-gradient(to right, #2563eb, #1d4ed8);
-    color: white;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  background: var(--primary);
+  color: #fff;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
 }
 
-.chatbot-header-content {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+.fastsewa-chatbot-header button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
 }
 
-.chatbot-avatar {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-}
-
-.chatbot-close-btn {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
-}
-
-.chatbot-close-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-}
-
-/* Chatbot Body */
+/* Body (Messages) */
 .fastsewa-chatbot-body {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px;
-    background-color: #fafafa;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-/* Messages */
-.chatbot-message {
-    max-width: 85%;
-    padding: 12px 16px;
-    border-radius: 18px;
-    line-height: 1.5;
-    font-size: 14px;
-    animation: fadeIn 0.3s ease;
+/* Message Bubbles */
+.fastsewa-message {
+  max-width: 85%;
+  padding: 12px 16px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
 }
 
-.chatbot-bot-message {
-    background: white;
-    color: #1f2937;
-    border: 1px solid #e5e7eb;
-    border-bottom-left-radius: 5px;
-    align-self: flex-start;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+.fastsewa-bot-message {
+  background: #fff;
+  border: 1px solid var(--border);
+  align-self: flex-start;
+  color: var(--dark);
 }
 
-.chatbot-user-message {
-    background: linear-gradient(to right, #2563eb, #3b82f6);
-    color: white;
-    border-bottom-right-radius: 5px;
-    align-self: flex-end;
-    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+.fastsewa-user-message {
+  background: var(--primary);
+  color: #fff;
+  align-self: flex-end;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+/* Service Buttons Grid */
+.service-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 5px;
 }
 
-/* Chatbot Footer */
+.service-btn {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--dark);
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.2s;
+  text-align: left;
+}
+
+.service-btn:hover {
+  background: #fff0e6; /* Halkaa sa orange hover par */
+  border-color: #ffccbc;
+}
+
+/* Footer */
 .fastsewa-chatbot-footer {
-    border-top: 1px solid #e5e7eb;
-    padding: 16px;
-    background: white;
-    display: flex;
-    gap: 10px;
+  padding: 12px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  background: #fff;
 }
 
-#chatbotInput {
-    flex: 1;
-    border: 1px solid #d1d5db;
-    border-radius: 24px;
-    padding: 12px 18px;
-    font-size: 14px;
-    outline: none;
-    transition: border-color 0.2s;
+.fastsewa-chatbot-input {
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  outline: none;
+  font-size: 14px;
 }
 
-#chatbotInput:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+.fastsewa-chatbot-send-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#chatbotSendBtn {
-    background: #2563eb;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 46px;
-    height: 46px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-#chatbotSendBtn:hover {
-    background: #1d4ed8;
-}
-
-/* Quick Service Cards */
-.service-quick-cards {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.service-card {
-    background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 12px;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-}
-
-.service-card:hover {
-    transform: translateY(-2px);
-    border-color: #2563eb;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
-}
-
-.service-icon {
-    font-size: 20px;
-}
-
-.service-name {
-    font-size: 13px;
-    font-weight: 600;
-    color: #1f2937;
-}
-
-/* PDF Download Button */
+/* PDF Button */
 .pdf-download-btn {
-    background: #10b981;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 16px;
-    font-size: 13px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 10px;
-    text-decoration: none;
+  display: inline-block;
+  background: #22c55e; /* Green for Download button is usually better, kept green */
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 16px;
+  text-decoration: none;
+  font-size: 13px;
+  margin-top: 5px;
+  font-weight: 500;
 }
-
 .pdf-download-btn:hover {
-    background: #0da271;
-}
-
-/* Responsive Design */
-@media (max-width: 480px) {
-    .fastsewa-chatbot-container {
-        width: calc(100vw - 40px);
-        right: 20px;
-        bottom: 80px;
-        height: 70vh;
-    }
-    
-    .fastsewa-chatbot-toggle {
-        right: 20px;
-        bottom: 20px;
-    }
-    
-    .service-quick-cards {
-        grid-template-columns: 1fr;
-    }
+  background: #16a34a;
 }
