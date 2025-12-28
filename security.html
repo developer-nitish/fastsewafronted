@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="security.css">
     <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Header & Navigation -->
@@ -372,57 +373,90 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="section contact" id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Contact Us</h2>
+   <!-- ================= CONTACT ================= -->
+<section id="contact" class="contact-section">
+    <div class="container">
+        <h2 class="section-title text-white">Contact Us</h2>
+        <p class="section-subtitle text-white">Get a free initial consultation</p>
+
+        <div class="contact-wrapper">
+
+            <!-- INFO -->
+            <div class="contact-info">
+                <h3 style="color: #f1f5f9;">Get in Touch</h3>
+                <p><i class="fas fa-map-marker-alt"></i> B Hub, Gandhi Maidan, Patna, Bihar</p>
+                <p><i class="fas fa-phone-alt"></i> +91 8275723755</p>
+                <p><i class="fas fa-envelope"></i> fastsewa2020@gmail.com</p>
             </div>
-            
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3>Get In Touch</h3>
-                    <p>Reach out to us for comprehensive security solutions tailored to your specific needs. Our team is available 24/7 to address your security concerns.</p>
-                    
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4>Head Office</h4>
-                                <p>B Hub<br>Gandhi Maidan, Patna</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <h4>Phone Number</h4>
-                                <p>+91 8275723755<br>+91 8275723755 (24/7 Helpline)</p>
-                            </div>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>Email Address</h4>
-                                <p>info@fastsewa.com<br>support@fastsewa.com</p>
-                            </div>
-                        </div>
+
+            <!-- FORM -->
+            <div class="contact-form-box">
+                <form id="contactForm">
+
+                    <div class="form-group">
+                        <input type="text" name="name" id="name" required>
+                        <label>Your Name</label>
                     </div>
-                </div>
-                
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <input type="text" placeholder="Your Name" required>
-                        <input type="email" placeholder="Your Email" required>
-                        <input type="text" placeholder="Subject" required>
-                        <textarea placeholder="Your Message" required></textarea>
-                        <button type="submit" class="btn">Send Message</button>
-                    </form>
-                </div>
+
+                    <div class="form-group">
+                        <input type="email" name="email" id="email" required>
+                        <label>Your Email</label>
+                    </div>
+
+                    <div class="form-group">
+                        <select name="title" id="service" required>
+                            <option value="">Select Service</option>
+                            <option value="Security Solutions">Security Solutions</option>
+                            <option value="Security Guard">Security Guard</option>
+                            <option value="Facility Management">Facility Management</option>
+                            <option value="Cash Logistics">Cash Logistics</option>
+                            <option value="Electronic Security">Electronic Security</option>
+                            <option value="Event Security">Event Security</option>
+                            <option value="Risk Consulting">Risk Consulting</option>
+                            <option value="Other Services">Other Services</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea name="message" id="message" rows="4" required></textarea>
+                        <label>Brief description of your issue</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-block">Send Message</button>
+                </form>
             </div>
+
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- ================= EMAILJS ================= -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+(function () {
+    emailjs.init("82w8_I7wL3TeHxJa6"); // ✅ Public Key
+})();
+
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    emailjs.sendForm(
+        "service_ap93y7a",   // ✅ Service ID
+        "template_hvuzvq9",  // ✅ Template ID
+        this
+    ).then(
+        function () {
+            alert("✅ Message sent successfully!");
+            document.getElementById("contactForm").reset();
+        },
+        function (error) {
+            alert("❌ Message nahi gaya");
+            console.log(error);
+        }
+    );
+});
+</script>
 
     <!-- Footer -->
     <footer>
@@ -496,7 +530,7 @@
             </div>
             <div>
                 <h3>FastSewa Assistant</h3>
-                <p>AI Support for 6 Services</p>
+                <p>AI Support for 9 Services</p>
             </div>
         </div>
         <button class="chatbot-close-btn" id="chatbotCloseBtn">
