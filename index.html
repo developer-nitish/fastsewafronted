@@ -21,6 +21,7 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#why-choose">About</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="#" class="btn-nav hide-mobile">Login/Signup</a></li>
                 <li><a href="#contact" class="btn-nav hide-mobile">Get Started</a></li>
             </ul>
             <div class="hamburger">
@@ -32,70 +33,107 @@
     </nav>
 
     <header id="home" class="hero">
-        <div class="container hero-content reveal">
-            <h1>FastSewa Super Portal</h1>
-            <h2>6 Essential Services, One Platform</h2>
-            <p>Your trusted partner for construction, security, legal services, healthcare, land verification, and maintenance solutions.</p>
-            <div class="hero-buttons">
-                <a href="#contact" class="btn btn-primary">Get Started</a>
-                <a href="#services" class="btn btn-outline">Learn More</a>
-            </div>
+        <div class="hero-slideshow">
+    <!-- Slide 1: Construction Service -->
+    <div class="hero-slide active" style="background-image: url('1.png');"></div>
+    
+    <!-- Slide 2: Security Service -->
+    <div class="hero-slide" style="background-image: url('image/2.jpeg');"></div>
+    
+    <!-- Slide 3: Medical Service -->
+    <div class="hero-slide" style="background-image: url('image/3.jpeg');"></div>
+    
+    <!-- Slide 4: Legal Service -->
+    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+    
+    <!-- Slide 5: Repair Service -->
+    <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+</div>
+        <div class="hero-content">
+            <h1 class="reveal">FastSewa Super Portal</h1>
+            <h2>9 Essential Services, One Platform</h2>
+            <p class="reveal">Your One-Stop Solution for Construction, Security, Legal, Medical, Land Verification, Repair, Finance, Material Supply, and Support Services.</p>
+            <a href="#services" class="btn btn-primary reveal">Explore Services</a>
+            <a href="#contact" class="btn btn-primary">Get Started</a>
         </div>
     </header>
+    <div class="hero-controls">
+    <button class="hero-nav-btn" id="prev-hero-slide">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+    
+    <div class="hero-dots">
+        <div class="hero-dot active" data-slide="0"></div>
+        <div class="hero-dot" data-slide="1"></div>
+        <div class="hero-dot" data-slide="2"></div>
+        <div class="hero-dot" data-slide="3"></div>
+        <div class="hero-dot" data-slide="4"></div>
+    </div>
+    
+    <button class="hero-nav-btn" id="next-hero-slide">
+        <i class="fas fa-chevron-right"></i>
+    </button>
+</div>
 
     <section id="services" class="section-pad">
         <div class="container">
             <h2 class="section-title reveal">Our Services</h2>
             <div class="grid-3">
-                <div class="service-card reveal">
+                <div class="service-card reveal"onclick="location.href='newconstruction.html';" style="cursor: pointer;">
                     <div class="icon-box"><i class="fas fa-building"></i></div>
                     <h3>Construction – FastSewa BuildNet</h3>
                     <p>Complete house, renovation & commercial construction solutions.</p>
                     <a href="newconstruction.html" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="service-card reveal">
+                <div class="service-card reveal"onclick="location.href='security.html';" style="cursor: pointer;">
                     <div class="icon-box"><i class="fas fa-user-shield"></i></div>
                     <h3>Security Guard – FastSewa SecureForce</h3>
                     <p>Professional trained security guards for all requirements.</p>
                     <a href="security.html" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="service-card reveal">
+                <div class="service-card reveal"onclick="location.href='legal.html';" style="cursor: pointer;">
                     <div class="icon-box"><i class="fas fa-gavel"></i></div>
-                    <h3>Legal & GST – FastSewa Filings</h3><
+                    <h3>Legal & GST – FastSewa Filings</h3>
                     <p>GST, tax, legal filings and documentation services.</p>
                     <a href="legal.html" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="service-card reveal">
+                <div class="service-card reveal"onclick="location.href='medical.html';" style="cursor: pointer;">
                     <div class="icon-box"><i class="fas fa-heartbeat"></i></div>
                     <h3>Medical Services</h3>
                     <p>Doctors, nurses, and health assistance at your doorstep.</p>
                     <a href="medical.html" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="service-card reveal">
+                <div class="service-card reveal"onclick="location.href='land.html';" style="cursor: pointer;">
                     <div class="icon-box"><i class="fas fa-map-marked-alt"></i></div>
                     <h3>Land Verification</h3>
                     <p>Land record check and property document verification.</p>
                     <a href="land.html" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="service-card reveal">
+                <div class="service-card reveal"onclick="location.href='repair.html';" style="cursor: pointer;">
                     <div class="icon-box"><i class="fas fa-tools"></i></div>
                     <h3>Repair & Maintenance</h3>
                     <p>All home and office repair services by experts.</p>
                     <a href="repair.html" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <div class="service-card reveal">
+                <div class="service-card reveal"onclick="location.href='finance.html';" style="cursor: pointer;">
                 <div class="service-icon"><i class="fas fa-wallet"></i></div>
                 <h3>Finance Assistant</h3>
                 <p>Personal budgeting, EMI planning, and savings guidance.</p>
                 <a href="finance.html" class="service-link">
                     Learn More →
-                </a>
+                </a></a>
             </div>
-                <div class="service-card reveal">
+                <div class="service-card reveal"onclick="location.href='material.html';" style="cursor: pointer;">
     <div class="icon-box"><i class="fas fa-truck-loading"></i></div>
     <h3>Material Suppliers</h3>
     <p>High-quality construction materials delivered directly to your site.</p>
     <a href="material.html" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+</div>
+               <div class="service-card reveal"onclick="location.href='support1.html';" style="cursor: pointer;">
+     <div class="icon-box"><i class="fas fa-headset"></i></div>
+    <h3>Support & Solutions</h3>
+    <p>Dedicated 24/7 customer assistance and expert technical problem-solving.</p>
+    <a href="support1.html" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
 </div>
             </div>
         </div>
@@ -276,6 +314,9 @@
                             <option value="Medical Services">Medical Services</option>
                             <option value="Land Verification">Land Verification</option>
                             <option value="Repair & Maintenance">Repair & Maintenance</option>
+                            <option value="Finance Assistant">Finance Assistant</option>
+                            <option value="Material Suppliers">Material Suppliers</option>
+                            <option value="Other Services">Other Services</option>
                         </select>
                     </div>
 
@@ -350,7 +391,7 @@
 </style>
 
         <div style="text-align: center; padding-top: 20px; font-size: 13px; color: #666;">
-            <p>&copy; 2024 FastSewa Super Portal. All rights reserved. | Developed by Team Nitish Kumar</p>
+            <p>&copy; 2024 FastSewa Super Portal. All rights reserved. | Developed by Team Nitish Kumar & Team Vivek Kumar</p>
         </div>
     </div>
 </footer>
