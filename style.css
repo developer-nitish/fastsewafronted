@@ -1,4 +1,4 @@
-/* --- CSS Variables & Reset --- */
+
 :root {
     /* NEW COLOR SCHEME: Deep Blue to Purple Gradient */
     --primary-gradient: linear-gradient(135deg, #1a237e 0%, #7b1fa2 100%);
@@ -139,15 +139,43 @@ body {
 }
 
 .logo {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--text-dark);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
 
-.logo i, .logo span { color: var(--accent-color); }
+        .logo-icon {
+            
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .logo:hover .logo-icon {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .logo-text {
+            font-size: 26px;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: orange;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            color: var(--accent);
+        }
 
 .nav-links {
     display: flex;

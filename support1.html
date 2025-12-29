@@ -80,7 +80,7 @@
         }
 
         .logo-icon {
-            background: var(--gradient);
+            
             width: 42px;
             height: 42px;
             border-radius: 12px;
@@ -856,12 +856,12 @@
     <header id="header">
         <div class="container">
             <div class="header-content">
-                <a href="index.html" class="logo">
-                    <div class="logo-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <div class="logo-text">Fast<span>Sewa</span></div>
-                </a>
+               <a href="index.html" class="logo">
+    <div class="logo-icon">
+       <img src="image/logo1.png" alt="Logo" style="height: 80px; width: auto; margin-right: 5px;">
+    </div>
+    <div class="logo-text">FastSewa<span>Facilities&reg</span></div>
+</a>
                 
                 <nav id="main-nav">
                     <ul>
@@ -918,7 +918,7 @@
         
         <div class="hero-content animate__animated animate__fadeInUp">
             <h1>Complete Support for All <span class="floating">FastSewa</span> Services</h1>
-            <p>Your trusted partner for construction, security, legal, healthcare, land verification, maintenance, finance, and material solutions. Get 24/7 support for all 8 essential services.</p>
+            <p>Your trusted partner for construction, security, legal, healthcare, land verification, maintenance, finance, and material solutions. Get 24/7 support for all 9 essential services.</p>
             <div class="hero-btns">
                 <a href="#all-services" class="btn btn-primary"><i class="fas fa-th-large"></i> Explore All Services</a>
                 <a href="#contact" class="btn btn-secondary"><i class="fas fa-phone-alt"></i> Emergency Support</a>
@@ -1136,6 +1136,29 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- other services -->
+                <div class="service-card" id="other-services">
+                    <div class="service-header" style="background: linear-gradient(135deg, #6a4c93 0%, #543c7a 100%);">
+                        <i class="fas fa-boxes"></i>
+                        <h3>other-services</h3>
+                    </div>
+                    <div class="service-body">
+                        <h3>Other Services</h3>
+                        <p>Anything you need other than our services you can click on this and tell us.</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> All types of Services</li>
+                            <li><i class="fas fa-check"></i> Maintain privacy and entegrity of Customers</li>
+                            <li><i class="fas fa-check"></i> Trusted by more than 1000+ Customers</li>
+                            <li><i class="fas fa-check"></i> Professional Team with 100% accuracy</li>
+                            <li><i class="fas fa-check"></i> Timely delivery guarantee of any services</li>
+                        </ul>
+                        <div class="service-actions">
+                            <a href="#contact-form" class="btn btn-primary btn-small"><i class="fas fa-edit"></i> Apply Now</a>
+                            <a href="tel:+918275723755" class="btn btn-small" style="background: var(--light-gray); color: var(--dark);"><i class="fas fa-phone"></i> Call</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1178,12 +1201,12 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+     <!-- Contact Section -->
     <section class="contact-section" id="contact">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Contact FastSewa Support</h2>
-                <p class="section-subtitle">Get personalized assistance for any of our 8 services with 24/7 availability</p>
+                <p class="section-subtitle">Get personalized assistance for any of our 9 services with 24/7 availability</p>
             </div>
             
             <div class="contact-container">
@@ -1225,63 +1248,84 @@
                         <div>
                             <h4>AI Support Assistant</h4>
                             <p><strong>FastSewa AI Assistant</strong></p>
-                            <p>Instant answers for all 6 services</p>
+                            <p>Instant answers for all 9 services</p>
                             <p style="font-size: 14px; color: var(--secondary);"><i class="fas fa-robot"></i> Available 24/7</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="contact-form" id="contact-form">
-                    <h3>Send Service Request</h3>
-                    <form id="serviceRequestForm">
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" required placeholder="Enter your full name">
-                        </div>
+                
                         
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" required placeholder="Enter 10-digit mobile number">
-                        </div>
+                        <!-- FORM -->
+            <div class="contact-form" id="contact-form">
+                <form id="contactForm">
+
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" name="name" id="name" required>
                         
-                        <div class="form-group">
-                            <label for="service">Select Service Needed</label>
-                            <select id="service" class="service-select" required>
-                                <option value="">Choose a service</option>
-                                <option value="construction">Construction & Renovation</option>
-                                <option value="security">Security Guard Services</option>
-                                <option value="legal">Legal & GST Services</option>
-                                <option value="medical">Medical Services</option>
-                                <option value="land">Land Verification</option>
-                                <option value="repair">Repair & Maintenance</option>
-                                <option value="finance">Finance Assistant</option>
-                                <option value="materials">Material Suppliers</option>
-                                <option value="Other Services">Other Services</option>
-                            </select>
-                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Your Email</label>
+                        <input type="email" name="email" id="email" required>
                         
-                        <div class="form-group">
-                            <label for="urgency">Urgency Level</label>
-                            <select id="urgency" class="service-select">
-                                <option value="normal">Normal (24-48 hours)</option>
-                                <option value="urgent">Urgent (Same day)</option>
-                                <option value="emergency">Emergency (Immediate)</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Service Details</label>
-                            <textarea id="message" rows="4" required placeholder="Describe your requirement in detail..."></textarea>
-                        </div>
-                        
-                        <button type="submit" class="submit-btn">
-                            <i class="fas fa-paper-plane"></i> Submit Service Request
-                        </button>
-                    </form>
-                </div>
+                    </div>
+
+                    <div class="form-group">
+                        <select name="title" id="service" required>
+                            <option value="">Select Service</option>
+                            <option value="Construction">Construction</option>
+                            <option value="Security Guard">Security Guard</option>
+                            <option value="Legal & GST">Legal & GST</option>
+                            <option value="Medical Services">Medical Services</option>
+                            <option value="Land Verification">Land Verification</option>
+                            <option value="Repair & Maintenance">Repair & Maintenance</option>
+                            <option value="Finance Assistant">Finance Assistant</option>
+                            <option value="Material Suppliers">Material Suppliers</option>
+                            <option value="Other Services">Other Services</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea name="message" id="message" rows="4" required></textarea>
+                        <label>Brief description of your issue</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-block">Send Message</button>
+                </form>
+            </div>
             </div>
         </div>
     </section>
+
+    <!-- ================= EMAILJS ================= -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+(function () {
+    emailjs.init("82w8_I7wL3TeHxJa6"); // ✅ Public Key
+})();
+
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    emailjs.sendForm(
+        "service_ap93y7a",   // ✅ Service ID
+        "template_hvuzvq9",  // ✅ Template ID
+        this
+    ).then(
+        function () {
+            alert("✅ Message sent successfully!");
+            document.getElementById("contactForm").reset();
+        },
+        function (error) {
+            alert("❌ Message nahi gaya");
+            console.log(error);
+        }
+    );
+});
+</script>
 
     <!-- Footer -->
     <footer>
@@ -1289,7 +1333,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>FastSewa</h3>
-                    <p>Your trusted partner for 8 essential services since 2020. Quality, reliability, and customer satisfaction guaranteed.</p>
+                    <p>Your trusted partner for 9 essential services since 2020. Quality, reliability, and customer satisfaction guaranteed.</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
