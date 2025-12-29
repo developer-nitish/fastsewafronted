@@ -104,7 +104,7 @@
             </div>
 
             <div class="contact-form">
-                <form>
+                <form id="contactForm">
                     <div class="form-group">
                         <input type="text" placeholder="Your Name" required>
                     </div>
@@ -128,8 +128,36 @@
         </div>
     </section>
 
+    <!-- ================= EMAILJS ================= -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+(function () {
+    emailjs.init("82w8_I7wL3TeHxJa6"); // ✅ Public Key
+})();
+
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    emailjs.sendForm(
+        "service_ap93y7a",   // ✅ Service ID
+        "template_hvuzvq9",  // ✅ Template ID
+        this
+    ).then(
+        function () {
+            alert("✅ Message sent successfully!");
+            document.getElementById("contactForm").reset();
+        },
+        function (error) {
+            alert("❌ Message nahi gaya");
+            console.log(error);
+        }
+    );
+});
+</script>
+
     <footer>
-        <p>Welcome To FastSewa Ecosystem</p>
+        <p>&copy; 2025 FastSewa Facilities Legal. All Rights Reserved.| Developed by Team Vivek Kumar</p>
     </footer>
     <!-- ==================== -->
 <!-- FASTSEWA CHATBOT HTML -->
