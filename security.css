@@ -648,3 +648,141 @@ footer { background: #000; color: #94a3b8; text-align: center; padding: 2rem; }
                 padding: 50px 0;
             }
         }
+
+
+ /* --- Contact Section Styles --- */
+.contact-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); /* Dark professional background */
+    color: white;
+}
+
+.text-white { color: #ffffff !important; }
+
+.contact-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 50px;
+    align-items: flex-start;
+}
+
+/* --- Left Side: Info --- */
+.contact-info {
+    flex: 1;
+    min-width: 300px;
+    padding: 20px;
+}
+
+.contact-info h3 {
+    font-size: 2rem;
+    margin-bottom: 25px;
+}
+
+.contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #cbd5e1;
+}
+
+.contact-info i {
+    color: var(--secondary); /* Uses your brand color for icons */
+    font-size: 1.2rem;
+    width: 25px;
+}
+
+/* --- Right Side: Form Box --- */
+.contact-form-box {
+    flex: 1.5;
+    min-width: 300px;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* --- Floating Labels & Form Groups --- */
+.form-group {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.form-group input, 
+.form-group textarea, 
+.form-group select {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1rem;
+    color: #333;
+    border: none;
+    border-bottom: 2px solid #ddd;
+    outline: none;
+    background: transparent;
+    transition: 0.3s;
+}
+
+.form-group label {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    color: #999;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+/* Floating Animation Logic */
+.form-group input:focus ~ label,
+.form-group input:valid ~ label,
+.form-group textarea:focus ~ label,
+.form-group textarea:valid ~ label {
+    top: -15px;
+    font-size: 0.85rem;
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+    border-bottom: 2px solid var(--primary);
+}
+
+/* Select Field Style */
+.form-group select {
+    border-bottom: 2px solid #ddd;
+    color: #666;
+    cursor: pointer;
+}
+
+/* --- Button Styling --- */
+.btn-block {
+    width: 100%;
+    padding: 15px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-block:hover {
+    background: var(--secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .contact-wrapper {
+        flex-direction: column;
+    }
+    
+    .contact-form-box {
+        padding: 30px 20px;
+    }
+}
