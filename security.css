@@ -705,14 +705,14 @@ footer { background: #000; color: #94a3b8; text-align: center; padding: 2rem; }
 }
 
 /* --- Floating Labels & Form Groups --- */
-.form-group {
+.form-group1 {
     position: relative;
     margin-bottom: 30px;
 }
 
-.form-group input, 
-.form-group textarea, 
-.form-group select {
+.form-group1 input, 
+.form-group1 textarea, 
+.form-group1 select {
     width: 100%;
     padding: 12px 0;
     font-size: 1rem;
@@ -724,7 +724,7 @@ footer { background: #000; color: #94a3b8; text-align: center; padding: 2rem; }
     transition: 0.3s;
 }
 
-.form-group label {
+.form-group1 label {
     position: absolute;
     top: 12px;
     left: 0;
@@ -734,23 +734,23 @@ footer { background: #000; color: #94a3b8; text-align: center; padding: 2rem; }
 }
 
 /* Floating Animation Logic */
-.form-group input:focus ~ label,
-.form-group input:valid ~ label,
-.form-group textarea:focus ~ label,
-.form-group textarea:valid ~ label {
+.form-group1 input:focus ~ label,
+.form-group1 input:valid ~ label,
+.form-group1 textarea:focus ~ label,
+.form-group1 textarea:valid ~ label {
     top: -15px;
     font-size: 0.85rem;
     color: var(--primary);
     font-weight: bold;
 }
 
-.form-group input:focus, 
-.form-group textarea:focus {
+.form-group1 input:focus, 
+.form-group1 textarea:focus {
     border-bottom: 2px solid var(--primary);
 }
 
 /* Select Field Style */
-.form-group select {
+.form-group1 select {
     border-bottom: 2px solid #ddd;
     color: #666;
     cursor: pointer;
