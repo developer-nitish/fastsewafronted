@@ -180,13 +180,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("chatbotInput");
   const messages = document.getElementById("chatbotMessages");
 
-  // ✅ SAME BACKEND
-  const API = "https://fastsewabackend-production.up.railway.app/api";
+  // ✅ SAME-ORIGIN BACKEND (recommended for deployment)
+  const API = "/api";
 
   toggleBtn.onclick = () => chatbot.style.display = "flex";
   closeBtn.onclick = () => chatbot.style.display = "none";
   sendBtn.onclick = sendMessage;
-  
+
 
   input.addEventListener("keypress", e => {
     if (e.key === "Enter") sendMessage();

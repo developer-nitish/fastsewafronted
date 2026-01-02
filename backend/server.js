@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
 
 // Load environment variables
 dotenv.config();
@@ -12,8 +13,13 @@ const connectDB = require('./config/database');
 const app = express();
 
 // Middleware
+const corsOriginEnv = process.env.CORS_ORIGIN;
+const corsOrigin = corsOriginEnv
+    ? corsOriginEnv.split(',').map((o) => o.trim()).filter(Boolean)
+    : true; // reflect request origin by default
+
 app.use(cors({
-    origin: '*', // Allow all origins for local development
+    origin: corsOrigin,
     credentials: true
 }));
 app.use(express.json());
@@ -25,6 +31,7 @@ connectDB();
 // Import routes
 const authRoutes = require('./routes/authRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
+const chatRoutes = require('./routes/chatRoutes');
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
@@ -52,6 +59,22 @@ app.get('/api', (req, res) => {
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/services', serviceRoutes);
+app.use('/api', chatRoutes);
+
+// Serve static frontend (single-deploy friendly)
+// Frontend lives one level up from /backend
+const frontendDir = path.join(__dirname, '..');
+
+// Prevent accidentally serving backend source files
+app.use('/backend', (req, res) => {
+    res.status(404).json({ success: false, message: 'Not found' });
+});
+
+app.use(express.static(frontendDir));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(frontendDir, 'index.html'));
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -74,10 +97,10 @@ app.use('*', (req, res) => {
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`);
+    console.log(`🚀 Server running on port ${PORT}`);
     console.log(`📚 API Documentation:`);
-    console.log(`   Health Check: http://localhost:${PORT}/api/health`);
-    console.log(`   Register: POST http://localhost:${PORT}/api/auth/register`);
-    console.log(`   Login: POST http://localhost:${PORT}/api/auth/login`);
-    console.log(`\n💡 Frontend should connect to: http://localhost:${PORT}/api`);
+    console.log(`   Health Check: /api/health`);
+    console.log(`   Register: POST /api/auth/register`);
+    console.log(`   Login: POST /api/auth/login`);
+    console.log(`💡 Frontend is served from / (same-origin /api)`);
 });

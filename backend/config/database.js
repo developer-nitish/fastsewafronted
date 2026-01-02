@@ -2,9 +2,14 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
     try {
-        console.log('🔄 Connecting to local MongoDB...');
+        console.log('🔄 Connecting to MongoDB...');
 
-        const conn = await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/fastsewa', {
+        const mongoUri =
+            process.env.MONGODB_URI ||
+            process.env.MONGO_URI ||
+            'mongodb://localhost:27017/fastsewa';
+
+        const conn = await mongoose.connect(mongoUri, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             serverSelectionTimeoutMS: 5000,
@@ -19,11 +24,8 @@ const connectDB = async () => {
         return conn;
     } catch (error) {
         console.error(`❌ MongoDB Connection Error: ${error.message}`);
-        console.log('\n🔧 Please make sure:');
-        console.log('1. MongoDB is installed on your computer');
-        console.log('2. MongoDB service is running');
-        console.log('3. For Windows: Run "net start MongoDB" as Administrator');
-        console.log('4. For Mac: Run "brew services start mongodb-community@7.0"');
+        console.log('\n🔧 Please make sure your MongoDB connection string is set.');
+        console.log('   Use env var MONGODB_URI (or MONGO_URI).');
 
         process.exit(1);
     }

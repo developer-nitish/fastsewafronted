@@ -1,9 +1,10 @@
 // FastSewa Authentication System - Backend Integrated
 // Using REST API calls to backend
 
-// Backend API Configuration - LOCAL DEVELOPMENT
+// Backend API Configuration
+// Use relative '/api' so the frontend works when served by the backend in production.
 const API_CONFIG = {
-    BASE_URL: 'http://localhost:5000/api', // Local backend
+    BASE_URL: '/api',
     ENDPOINTS: {
         REGISTER: '/auth/register',
         LOGIN: '/auth/login',
