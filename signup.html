@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastSewa - Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body class="auth-page">
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <img src="image/logo1.png" alt="Logo" style="height: 80px; width: auto; margin-right: 2rem; margin-left: 0px;">
+                    </div>
+                    <div class="logo-text">FastSewa<span> Facilities&reg;</span></div>
+                </a>
+            </div>
+            <div class="nav-links">
+                <li><a href="index.html" class="btn-nav">Back to Home</a></li>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="auth-container">
+        <div class="auth-card">
+            <!-- Left Side: Form -->
+            <div class="auth-form-side">
+                <div class="auth-header">
+                    <h1>Create Account</h1>
+                    <p>Join FastSewa Super Portal today</p>
+                </div>
+
+                <!-- Signup Form -->
+                <form id="signupForm" class="auth-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">
+                                <i class="fas fa-user"></i> First Name
+                            </label>
+                            <input type="text" id="firstName" placeholder="Enter first name" required>
+                            <div class="error-msg" id="firstNameError"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">
+                                <i class="fas fa-user"></i> Last Name
+                            </label>
+                            <input type="text" id="lastName" placeholder="Enter last name" required>
+                            <div class="error-msg" id="lastNameError"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signupEmail">
+                            <i class="fas fa-envelope"></i> Email Address
+                        </label>
+                        <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                        <div class="error-msg" id="signupEmailError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">
+                            <i class="fas fa-phone"></i> Phone Number
+                        </label>
+                        <input type="tel" id="phone" placeholder="Enter 10-digit phone number" required>
+                        <div class="error-msg" id="phoneError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userType">
+                            <i class="fas fa-users"></i> I want to join as
+                        </label>
+                        <select id="userType" required>
+                            <option value="">Select account type</option>
+                            <option value="customer">Customer (Looking for services)</option>
+                            <option value="service_provider">Service Provider</option>
+                            <option value="vendor">Vendor/Supplier</option>
+                        </select>
+                        <div class="error-msg" id="userTypeError"></div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="signupPassword">
+                                <i class="fas fa-lock"></i> Password
+                            </label>
+                            <div class="password-wrapper">
+                                <input type="password" id="signupPassword" placeholder="Create password" required>
+                                <button type="button" class="toggle-password" id="toggleSignupPassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="error-msg" id="signupPasswordError"></div>
+                            <div class="password-strength" id="passwordStrength" style="display: none;">
+                                <div class="strength-bar" aria-hidden="true">
+                                    <span class="strength-bar-fill" id="strengthBarFill"></span>
+                                </div>
+                                <div class="strength-text" id="strengthText"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">
+                                <i class="fas fa-lock"></i> Confirm Password
+                            </label>
+                            <div class="password-wrapper">
+                                <input type="password" id="confirmPassword" placeholder="Confirm password" required>
+                                <button type="button" class="toggle-password" id="toggleConfirmPassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="error-msg" id="confirmPasswordError"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox">
+                            <input type="checkbox" id="terms" required>
+                            <span>I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a></span>
+                        </label>
+                        <div class="error-msg" id="termsError"></div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block" id="signupBtn">
+                        <span id="signupText">Create Account</span>
+                        <div class="spinner hidden" id="signupSpinner"></div>
+                    </button>
+
+                    <div class="auth-footer">
+                        <p>Already have an account? <a href="login.html" class="auth-link">Sign in here</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Side: Image/Info -->
+            <div class="auth-info-side">
+                <div class="auth-image">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="FastSewa Community">
+                    <div class="image-overlay">
+                        <h2>Why Join FastSewa?</h2>
+                        <div class="benefits">
+                            <div class="benefit-item">
+                                <i class="fas fa-bolt"></i>
+                                <div>
+                                    <h3>Fast Service</h3>
+                                    <p>Quick response and service delivery</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <div>
+                                    <h3>Verified Professionals</h3>
+                                    <p>All service providers are background checked</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-headset"></i>
+                                <div>
+                                    <h3>24/7 Support</h3>
+                                    <p>Round-the-clock customer assistance</p>
+                                </div>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-handshake"></i>
+                                <div>
+                                    <h3>Trusted Platform</h3>
+                                    <p>Thousands of satisfied customers</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden">
+        <div class="toast-content">
+            <i class="fas fa-check-circle toast-icon"></i>
+            <span class="toast-message" id="toastMessage"></span>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+</body>
+</html>

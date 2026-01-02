@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FastSewa - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <img src="image/logo1.png" alt="Logo" style="height: 80px; width: auto; margin-right: 2rem; margin-left: 0px;">
+                    </div>
+                    <div class="logo-text">FastSewa<span> Facilities&reg;</span></div>
+                </a>
+            </div>
+            <div class="nav-links">
+                <li class="user-menu">
+                    <div class="user-dropdown">
+                        <button class="user-btn" id="userMenuBtn">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="userName">User</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-content" id="userDropdown">
+                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </li>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="user-profile">
+                <div class="profile-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="profile-info">
+                    <h3 id="dashboardUserName">Loading...</h3>
+                    <p id="dashboardUserEmail">Loading...</p>
+                    <span class="user-badge" id="userTypeBadge">Customer</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-item active">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="#profile" class="nav-item">
+                    <i class="fas fa-user"></i> Profile
+                </a>
+                <a href="#bookings" class="nav-item">
+                    <i class="fas fa-calendar-check"></i> My Bookings
+                </a>
+                <a href="#services" class="nav-item">
+                    <i class="fas fa-cogs"></i> Service Requests
+                </a>
+                <a href="#messages" class="nav-item">
+                    <i class="fas fa-envelope"></i> Messages
+                </a>
+                <a href="#payments" class="nav-item">
+                    <i class="fas fa-credit-card"></i> Payments
+                </a>
+                <a href="#settings" class="nav-item">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+
+                <a href="#" class="nav-item logout-item" id="sidebarLogoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <div id="dashboard" class="dashboard-home">
+            <!-- Welcome Banner -->
+            <div class="welcome-banner">
+                <h1 id="welcomeMessage">Welcome back!</h1>
+                <p>Here's what's happening with your FastSewa account today.</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #4CAF50;">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="activeBookings">0</h3>
+                        <p>Active Bookings</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #2196F3;">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalServices">0</h3>
+                        <p>Total Services Used</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #FF9800;">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="rating">0.0</h3>
+                        <p>Your Rating</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #9C27B0;">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="walletBalance">₹0</h3>
+                        <p>Wallet Balance</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="section-card">
+                <h2>Quick Actions</h2>
+                <div class="actions-grid">
+                    <a href="index.html#services" class="action-card">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Book New Service</span>
+                    </a>
+                    <a href="#profile" class="action-card">
+                        <i class="fas fa-user-edit"></i>
+                        <span>Update Profile</span>
+                    </a>
+                    <a href="#payments" class="action-card">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Add Payment Method</span>
+                    </a>
+                    <a href="#support" class="action-card">
+                        <i class="fas fa-headset"></i>
+                        <span>Contact Support</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Recent Services -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h2>Recent Service Requests</h2>
+                    <a href="#services" class="view-all">View All</a>
+                </div>
+                <div class="services-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Service</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Professional</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentServices">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Recommended Services -->
+            <div class="section-card">
+                <h2>Recommended Services</h2>
+                <div class="recommended-grid">
+                    <div class="service-mini-card">
+                        <i class="fas fa-building"></i>
+                        <h4>New Construction</h4>
+                        <p>Complete house construction</p>
+                        <a href="newconstruction.html">Book Now</a>
+                    </div>
+                    <div class="service-mini-card">
+                        <i class="fas fa-user-shield"></i>
+                        <h4>Security Guard</h4>
+                        <p>Trained security personnel</p>
+                        <a href="security.html">Book Now</a>
+                    </div>
+                    <div class="service-mini-card">
+                        <i class="fas fa-heartbeat"></i>
+                        <h4>Medical Services</h4>
+                        <p>Doctors & nurses at home</p>
+                        <a href="medical.html">Book Now</a>
+                    </div>
+                    <div class="service-mini-card">
+                        <i class="fas fa-tools"></i>
+                        <h4>Repair Services</h4>
+                        <p>Home & office repairs</p>
+                        <a href="repair.html">Book Now</a>
+                    </div>
+                    <div class="service-mini-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Finance</h4>
+                        <p>Financial services & consulting</p>
+                        <a href="finance.html">Book Now</a>
+                    </div>
+                    <div class="service-mini-card">
+                        <i class="fas fa-file-invoice"></i>
+                        <h4>GST</h4>
+                        <p>GST registration & filing</p>
+                        <a href="gst.html">Book Now</a>
+                    </div>
+                    <div class="service-mini-card">
+                        <i class="fas fa-receipt"></i>
+                        <h4>Income Tax</h4>
+                        <p>ITR filing & tax support</p>
+                        <a href="incometax.html">Book Now</a>
+                    </div>
+                    <div class="service-mini-card">
+                        <i class="fas fa-scale-balanced"></i>
+                        <h4>Legal</h4>
+                        <p>Legal consultation & documentation</p>
+                        <a href="legal.html">Book Now</a>
+                    </div>
+                    <div class="service-mini-card">
+                        <i class="fas fa-map-location-dot"></i>
+                        <h4>Land Services</h4>
+                        <p>Land & property assistance</p>
+                        <a href="land.html">Book Now</a>
+                    </div>
+                    <div class="service-mini-card">
+                        <i class="fas fa-boxes-stacked"></i>
+                        <h4>Material</h4>
+                        <p>Construction materials supply</p>
+                        <a href="material.html">Book Now</a>
+                    </div>
+                    <div class="service-mini-card">
+                        <i class="fas fa-certificate"></i>
+                        <h4>Trademark</h4>
+                        <p>Trademark registration & support</p>
+                        <a href="trademark.html">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        <!-- Profile Section -->
+        <div id="profile" class="section-card dashboard-section" style="display: none;">
+            <h2>My Profile</h2>
+            <div class="profile-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="profileFirstName">First Name</label>
+                        <input type="text" id="profileFirstName" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="profileLastName">Last Name</label>
+                        <input type="text" id="profileLastName" placeholder="Last Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="profileEmail">Email</label>
+                    <input type="email" id="profileEmail" placeholder="Email" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="profilePhone">Phone</label>
+                    <input type="tel" id="profilePhone" placeholder="Phone">
+                </div>
+                <button class="btn btn-primary" id="updateProfileBtn">Update Profile</button>
+            </div>
+        </div>
+
+        <!-- Bookings Section -->
+        <div id="bookings" class="section-card dashboard-section" style="display: none;">
+            <h2>My Bookings</h2>
+            <div class="services-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Professional</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="allBookings">
+                        <!-- Data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Services Section -->
+        <div id="services" class="section-card dashboard-section" style="display: none;">
+            <h2>Service Requests</h2>
+            <div class="services-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Service Type</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="allServices">
+                        <!-- Data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Messages Section -->
+        <div id="messages" class="section-card dashboard-section" style="display: none;">
+            <div class="section-header">
+                <h2>Messages</h2>
+                <button class="btn btn-primary" id="newMessageBtn">
+                    <i class="fas fa-plus"></i> New Message
+                </button>
+            </div>
+            <div class="messages-container">
+                <div class="messages-list" id="messagesList">
+                    <!-- Messages will be loaded here -->
+                </div>
+                <div class="message-thread" id="messageThread" style="display: none;">
+                    <div class="thread-header">
+                        <button class="back-btn" id="backToMessages">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <h3 id="threadTitle">Message Thread</h3>
+                    </div>
+                    <div class="thread-messages" id="threadMessages">
+                        <!-- Thread messages -->
+                    </div>
+                    <div class="message-input">
+                        <textarea id="messageInput" placeholder="Type your message..."></textarea>
+                        <button class="btn btn-primary" id="sendMessageBtn">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payments Section -->
+        <div id="payments" class="section-card dashboard-section" style="display: none;">
+            <div class="section-header">
+                <h2>Payment Methods</h2>
+                <button class="btn btn-primary" id="addPaymentBtn">
+                    <i class="fas fa-plus"></i> Add Payment Method
+                </button>
+            </div>
+            <div class="payments-grid" id="paymentsGrid">
+                <!-- Payment methods will be loaded here -->
+            </div>
+            <div class="payment-history">
+                <h3>Payment History</h3>
+                <div class="payments-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Service</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paymentHistory">
+                            <!-- Payment history will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div id="settings" class="section-card dashboard-section" style="display: none;">
+            <h2>Account Settings</h2>
+            <div class="settings-sections">
+                <div class="settings-group">
+                    <h3>Notifications</h3>
+                    <div class="setting-item">
+                        <label class="toggle">
+                            <input type="checkbox" id="emailNotifications" checked>
+                            <span class="toggle-slider"></span>
+                            Email Notifications
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label class="toggle">
+                            <input type="checkbox" id="smsNotifications">
+                            <span class="toggle-slider"></span>
+                            SMS Notifications
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label class="toggle">
+                            <input type="checkbox" id="pushNotifications" checked>
+                            <span class="toggle-slider"></span>
+                            Push Notifications
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Privacy</h3>
+                    <div class="setting-item">
+                        <label class="toggle">
+                            <input type="checkbox" id="profileVisibility" checked>
+                            <span class="toggle-slider"></span>
+                            Public Profile
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <label class="toggle">
+                            <input type="checkbox" id="showPhone">
+                            <span class="toggle-slider"></span>
+                            Show Phone Number
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Security</h3>
+                    <button class="btn btn-secondary" id="changePasswordBtn">Change Password</button>
+                    <button class="btn btn-secondary" id="twoFactorBtn">Enable 2FA</button>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Danger Zone</h3>
+                    <button class="btn btn-danger" id="deleteAccountBtn">Delete Account</button>
+                </div>
+
+                <div class="settings-actions">
+                    <button class="btn btn-primary" id="saveSettingsBtn">Save Settings</button>
+                    <button class="btn btn-secondary" id="resetSettingsBtn">Reset to Default</button>
+                </div>
+            </div>
+        </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #111; color: #fff; padding: 40px 0 20px; font-family: sans-serif; clear: both;">
+        <div style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; border-bottom: 1px solid #333; padding-bottom: 30px;">
+                <!-- Footer content same as your index.html -->
+            </div>
+            <div style="text-align: center; padding-top: 20px; font-size: 13px; color: #666;">
+                <p>&copy; 2024 FastSewa Super Portal. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot (same as your index.html) -->
+    <button class="fastsewa-chatbot-toggle" id="toggleBtn">
+        <i class="fas fa-headset"></i>
+    </button>
+    
+    <div class="fastsewa-chatbot-container" id="chatbox">
+        <!-- Chatbot content same as your index.html -->
+    </div>
+
+    <script src="auth.js"></script>
+</body>
+</html>

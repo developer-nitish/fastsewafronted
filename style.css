@@ -579,3 +579,42 @@ footer {
         font-size: 16px;
     }
 }
+
+/* Add these to your existing style.css */
+
+/* Authentication Links */
+.btn-nav {
+    display: inline-block;
+    background: #ff5722;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid #ff5722;
+}
+
+.btn-nav:hover {
+    background: transparent;
+    color: #ff5722;
+}
+
+/* Mobile responsiveness for auth pages */
+@media (max-width: 768px) {
+    .auth-container {
+        padding: 1rem;
+    }
+    
+    .auth-card {
+        border-radius: 10px;
+    }
+    
+    .auth-form-side {
+        padding: 2rem 1.5rem;
+    }
+    
+    .auth-header h1 {
+        font-size: 2rem;
+    }
+}
